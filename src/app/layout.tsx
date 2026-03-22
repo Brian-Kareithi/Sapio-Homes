@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
- title: "Sapio Homes | Your Perfect City Home Awaits",
+ title: "Sapio Homes | Your Perfect Home Awaits",
   description: "Discover luxury apartments and homes in Nairobi's finest locations. Sapio Homes helps you find your dream home with premium properties and expert guidance.",
 };
 export default function RootLayout({
