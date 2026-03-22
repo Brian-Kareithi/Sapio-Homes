@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageCircle } from "lucide-react";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -9,114 +9,137 @@ export default function ContactSection() {
     email: "",
     reason: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
+    setIsSubmitting(true);
+    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     console.log(formData);
-    alert("Thank you for contacting us. We'll get back to you soon!");
-    setFormData({ name: "", email: "", reason: "" });
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+    
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({ name: "", email: "", reason: "" });
+    }, 3000);
   };
 
+  const contactMethods = [
+    { icon: Mail, title: "Email", details: "info@sapiohome.com", description: "Send us a message anytime" },
+    { icon: Phone, title: "Phone", details: "+254 113 556 551", description: "Mon-Fri, 9am - 6pm" },
+    { icon: MapPin, title: "Visit", details: "HH Towers, Nairobi", description: "Book an appointment" }
+  ];
+
   return (
-    <section id="contact" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Get In Touch
+    <section id="contact" className="py-20 bg-[#0a0a0f]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/5 border border-amber-500/20 mb-4">
+            <MessageCircle className="w-3 h-3 text-amber-500" />
+            <span className="text-amber-500 text-xs font-medium">Get in touch</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-light text-white mb-3">
+            Let's Connect
           </h2>
-          <p className="text-white/60 max-w-2xl mx-auto">
-            Have questions? We'd love to hear from you. Send us a message and we'll
-            respond as soon as possible.
+          <div className="w-12 h-px bg-amber-500/50 mx-auto" />
+          <p className="text-gray-500 text-sm mt-4 max-w-md mx-auto">
+            Have questions? We'd love to hear from you.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <div className="space-y-6">
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg flex items-center justify-center">
-                  <Mail className="w-6 h-6 text-white" />
+            {contactMethods.map((method, index) => {
+              const Icon = method.icon;
+              return (
+                <div key={index} className="group">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-[#111115] border border-gray-800 flex items-center justify-center group-hover:border-amber-500/50 transition-all duration-300">
+                      <Icon className="w-4 h-4 text-gray-500 group-hover:text-amber-500 transition-colors duration-300" />
+                    </div>
+                    <div>
+                      <p className="text-gray-400 text-sm mb-0.5">{method.title}</p>
+                      <p className="text-white font-medium text-base">{method.details}</p>
+                      <p className="text-gray-500 text-xs mt-1">{method.description}</p>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-white font-semibold">Email Us</h3>
-                  <p className="text-white/60">info@sapiohome.com</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg flex items-center justify-center">
-                  <Phone className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold">Call Us</h3>
-                  <p className="text-white/60">+254 113 556 551</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold">Visit Us</h3>
-                  <p className="text-white/60">HH Towers, Nairobi, Kenya</p>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
 
           {/* Contact Form */}
-          <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-            <h3 className="text-xl font-bold text-white mb-6">Send us a message</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-white/80 text-sm mb-2">Your Name</label>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400"
-                  placeholder="John Doe"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-white/80 text-sm mb-2">Email Address</label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400"
-                  placeholder="john@example.com"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-white/80 text-sm mb-2">Reason for Contacting</label>
-                <textarea
-                  value={formData.reason}
-                  onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
-                  rows={4}
-                  className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-amber-400"
-                  placeholder="Tell us how we can help..."
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold py-3 rounded-lg hover:from-amber-600 hover:to-orange-600 transition-all flex items-center justify-center space-x-2"
-              >
-                <Send className="w-5 h-5" />
-                <span>Send Message</span>
-              </button>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full bg-[#111115] border border-gray-800 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all duration-300"
+                placeholder="Your name"
+                required
+              />
             </div>
+            
+            <div>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full bg-[#111115] border border-gray-800 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all duration-300"
+                placeholder="Email address"
+                required
+              />
+            </div>
+            
+            <div>
+              <textarea
+                value={formData.reason}
+                onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                rows={4}
+                className="w-full bg-[#111115] border border-gray-800 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/50 transition-all duration-300 resize-none"
+                placeholder="How can we help?"
+                required
+              />
+            </div>
+            
+            <button
+              type="submit"
+              disabled={isSubmitting || isSubmitted}
+              className="w-full py-3 rounded-lg bg-[#111115] border border-gray-800 text-gray-400 hover:text-amber-500 hover:border-amber-500/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed group"
+            >
+              {isSubmitting ? (
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-4 h-4 border border-gray-500 border-t-amber-500 rounded-full animate-spin" />
+                  <span className="text-sm">Sending...</span>
+                </div>
+              ) : isSubmitted ? (
+                <span className="text-sm text-green-500">Message sent ✓</span>
+              ) : (
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-sm">Send message</span>
+                  <Send className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
+              )}
+            </button>
+
+            <p className="text-center text-gray-500 text-xs">
+              We'll respond within 24 hours
+            </p>
           </form>
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-16 pt-6 border-t border-gray-800/50 text-center">
+          <p className="text-gray-500 text-xs">
+            © 2026 Sapio Homes
+          </p>
         </div>
       </div>
     </section>
