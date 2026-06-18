@@ -1,8 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ppkfgsakvcijmmhjwbcz.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+    dangerouslyAllowSVG: true,
+  },
+  // Silence the lockfile warning
+  turbopack: {
+    root: process.cwd(),
+  },
 };
 
 export default nextConfig;

@@ -1,26 +1,94 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-app-bg: var(--bg);
+  --color-app-secondary: var(--bg-secondary);
+  --color-app-surface: var(--surface);
+  --color-app-surface-hover: var(--surface-hover);
+  --color-app-text: var(--text);
+  --color-app-secondary-text: var(--text-secondary);
+  --color-app-muted: var(--text-muted);
+  --color-app-border: var(--border);
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --surface: rgba(0, 0, 0, 0.03);
+  --surface-hover: rgba(0, 0, 0, 0.06);
+  --text: #111827;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border: #e5e7eb;
+
+  --props-bg: #f5f3ee;
+  --props-text: #1a1a2e;
+  --props-text-secondary: rgba(26, 26, 46, 0.65);
+  --props-text-muted: rgba(26, 26, 46, 0.4);
+  --props-border: rgba(26, 26, 46, 0.1);
+  --props-surface: rgba(26, 26, 46, 0.03);
+  --props-surface-hover: rgba(26, 26, 46, 0.06);
+  --props-accent: #d4a847;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --bg: #000000;
+  --bg-secondary: #0b0f17;
+  --surface: rgba(255, 255, 255, 0.05);
+  --surface-hover: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+
+  --props-bg: #0b0f17;
+  --props-text: #ffffff;
+  --props-text-secondary: rgba(255, 255, 255, 0.6);
+  --props-text-muted: rgba(255, 255, 255, 0.4);
+  --props-border: rgba(255, 255, 255, 0.1);
+  --props-surface: rgba(255, 255, 255, 0.03);
+  --props-surface-hover: rgba(255, 255, 255, 0.06);
+  --props-accent: #d4a847;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  @font-face {
+    font-family: 'Geist Sans';
+    src: url('/fonts/Geist-Variable.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('/fonts/GeistMono-Variable.woff2') format('woff2');
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .font-display {
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
+  }
+
+  .animate-reveal {
+    animation: reveal 0.5s ease-out;
+  }
+
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
 }
