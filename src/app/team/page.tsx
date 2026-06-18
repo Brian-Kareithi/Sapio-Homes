@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HardDrive, Megaphone, Settings, UserCheck, GraduationCap, PiggyBank, Monitor } from "lucide-react";
 
-const glassCard = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
-
 export const metadata: Metadata = {
   title: "Our Team | Sapio Homes",
   description: "Meet the Sapio Homes team — experienced real estate professionals dedicated to delivering affordable luxury living in Nairobi.",
@@ -81,8 +79,11 @@ export default function TeamPage() {
   return (
     <main className="bg-app-bg min-h-screen pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
+          &larr; Back to Home
+        </Link>
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
+          <h1 className="font-serif text-4xl sm:text-5xl font-light text-primary mb-4">
             Our Team
           </h1>
           <p className="text-secondary max-w-3xl mx-auto text-lg">
@@ -92,10 +93,10 @@ export default function TeamPage() {
         </div>
 
         {/* Leadership */}
-        <h2 className="text-2xl font-bold text-primary mb-8">Leadership</h2>
+        <h2 className="font-serif text-2xl font-light text-primary mb-8">Leadership</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {leadership.map((person) => (
-            <div key={person.name} className={`${glassCard} rounded-2xl p-6 text-center`}>
+            <div key={person.name} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
               <div className="w-20 h-20 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-amber-500/30">
                 <span className="text-2xl font-bold text-amber-400">
                   {person.name.split(" ").map((n) => n[0]).join("")}
@@ -109,14 +110,14 @@ export default function TeamPage() {
         </div>
 
         {/* Departments */}
-        <h2 className="text-2xl font-bold text-primary mb-8">Departments</h2>
+        <h2 className="font-serif text-2xl font-light text-primary mb-8">Departments</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {departments.map((dept) => {
             const Icon = dept.icon;
             return (
-              <div key={dept.name} className={`${glassCard} rounded-2xl p-6`}>
+              <div key={dept.name} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm"}>
                 <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 bg-amber-500/20 backdrop-blur-md rounded-xl flex items-center justify-center border border-amber-500/20">
+                  <div className="w-10 h-10 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
                     <Icon className="w-5 h-5 text-amber-400" />
                   </div>
                   <div>
@@ -133,8 +134,8 @@ export default function TeamPage() {
         </div>
 
         {/* Join the team */}
-        <div className={`${glassCard} rounded-2xl p-8 text-center`}>
-          <h2 className="text-2xl font-bold text-primary mb-4">Join Our Team</h2>
+        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center shadow-sm"}>
+          <h2 className="font-serif text-2xl font-light text-primary mb-4">Join Our Team</h2>
           <p className="text-secondary mb-6 max-w-xl mx-auto">
             We&apos;re always looking for talented individuals who share our passion for real estate
             and exceptional service. Check our current openings or send us your CV.

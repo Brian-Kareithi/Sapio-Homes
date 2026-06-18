@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
@@ -45,6 +45,7 @@ const navItems: NavItem[] = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -111,7 +112,7 @@ export default function Navbar() {
         const el = document.getElementById(id);
         if (el) el.scrollIntoView({ behavior: "smooth" });
       } else {
-        window.location.href = href;
+        router.push(href);
       }
     }
   };

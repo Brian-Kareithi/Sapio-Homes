@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Briefcase, MapPin, Clock, DollarSign, Send, Star, Users, TrendingUp } from "lucide-react";
 
-const glassCard = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
-
 export const metadata: Metadata = {
   title: "Careers | Sapio Homes",
   description: "Join the Sapio Homes team. Explore career opportunities in real estate sales, property management, marketing, and more in Nairobi.",
@@ -50,8 +48,11 @@ export default function CareersPage() {
   return (
     <main className="bg-app-bg min-h-screen pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
+          &larr; Back to Home
+        </Link>
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
+          <h1 className="font-serif text-4xl sm:text-5xl font-light text-primary mb-4">
             Careers
           </h1>
           <p className="text-secondary max-w-3xl mx-auto text-lg">
@@ -65,7 +66,7 @@ export default function CareersPage() {
           {perks.map((p) => {
             const Icon = p.icon;
             return (
-              <div key={p.title} className={`${glassCard} rounded-2xl p-6 text-center`}>
+              <div key={p.title} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
                 <Icon className="w-8 h-8 text-amber-400 mx-auto mb-3" />
                 <h3 className="text-primary font-semibold mb-1">{p.title}</h3>
                 <p className="text-secondary text-xs">{p.desc}</p>
@@ -75,13 +76,13 @@ export default function CareersPage() {
         </div>
 
         {/* Open Positions */}
-        <h2 className="text-2xl font-bold text-primary mb-8">Open Positions</h2>
+        <h2 className="font-serif text-2xl font-light text-primary mb-8">Open Positions</h2>
         <div className="space-y-6 mb-20">
           {jobOpenings.map((job) => (
-            <div key={job.title} className={`${glassCard} rounded-2xl p-6`}>
+            <div key={job.title} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm"}>
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <div>
-                  <h3 className="text-xl font-bold text-primary">{job.title}</h3>
+                  <h3 className="font-serif text-xl font-medium text-primary">{job.title}</h3>
                   <div className="flex flex-wrap gap-4 mt-2 text-sm text-secondary">
                     <span className="flex items-center gap-1">
                       <Briefcase className="w-4 h-4 text-amber-400" /> {job.type}
@@ -126,8 +127,8 @@ export default function CareersPage() {
         </div>
 
         {/* Spontaneous Application */}
-        <div className={`${glassCard} rounded-2xl p-8 text-center`}>
-          <h2 className="text-2xl font-bold text-primary mb-4">Don&apos;t See the Right Role?</h2>
+        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center shadow-sm"}>
+          <h2 className="font-serif text-2xl font-light text-primary mb-4">Don&apos;t See the Right Role?</h2>
           <p className="text-secondary mb-6 max-w-xl mx-auto">
             We&apos;re always on the lookout for talented individuals. Send us your CV and
             we&apos;ll keep you in mind for future opportunities.

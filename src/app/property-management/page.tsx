@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, Users, Wrench, BarChart3, Shield, Bell, CheckCircle, DollarSign } from "lucide-react";
 
-const glassCard = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
-
 export const metadata: Metadata = {
   title: "Property Management | Sapio Homes",
   description: "End-to-end property management services in Nairobi. We handle tenants, maintenance, rent collection, and reporting so you can enjoy passive income.",
@@ -13,8 +11,11 @@ export default function PropertyManagementPage() {
   return (
     <main className="bg-app-bg min-h-screen pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
+          &larr; Back to Home
+        </Link>
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
+          <h1 className="font-serif text-4xl sm:text-5xl font-light text-primary mb-4">
             Property Management
           </h1>
           <p className="text-secondary max-w-3xl mx-auto text-lg">
@@ -59,8 +60,8 @@ export default function PropertyManagementPage() {
           ].map((s) => {
             const Icon = s.icon;
             return (
-              <div key={s.title} className={`${glassCard} rounded-2xl p-6`}>
-                <div className="w-12 h-12 bg-amber-500/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-4 border border-amber-500/20">
+              <div key={s.title} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm"}>
+                <div className="w-12 h-12 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 border border-amber-500/20">
                   <Icon className="w-6 h-6 text-amber-400" />
                 </div>
                 <h3 className="text-lg font-bold text-primary mb-2">{s.title}</h3>
@@ -71,8 +72,8 @@ export default function PropertyManagementPage() {
         </div>
 
         {/* Why Choose Us */}
-        <div className={`${glassCard} rounded-2xl p-8 mb-20`}>
-          <h2 className="text-2xl font-bold text-primary mb-6">Why Choose Our Management Service?</h2>
+        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 mb-20 shadow-sm"}>
+          <h2 className="font-serif text-2xl font-light text-primary mb-6">Why Choose Our Management Service?</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-4">
               <div className="flex items-start gap-4">
@@ -117,7 +118,7 @@ export default function PropertyManagementPage() {
             { value: "24h", label: "Response Time" },
             { value: "6+", label: "Years Active" },
           ].map((s) => (
-            <div key={s.label} className={`${glassCard} rounded-2xl p-6 text-center`}>
+            <div key={s.label} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
               <div className="text-3xl font-bold text-amber-400 mb-2">{s.value}</div>
               <div className="text-sm text-secondary">{s.label}</div>
             </div>
@@ -125,7 +126,7 @@ export default function PropertyManagementPage() {
         </div>
 
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-primary mb-4">Interested in Our Management Services?</h2>
+          <h2 className="font-serif text-2xl font-light text-primary mb-4">Interested in Our Management Services?</h2>
           <p className="text-secondary mb-6 max-w-xl mx-auto">
             Let us help you maximize your property&apos;s potential while you enjoy passive income.
           </p>

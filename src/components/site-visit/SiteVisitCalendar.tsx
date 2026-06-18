@@ -71,31 +71,38 @@ export default function SiteVisitCalendar() {
   };
 
   return (
-    <section className="py-20 bg-app-secondary">
+    <section className="py-20 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <span className="h-px w-8 bg-amber-400" />
+          <span className="text-xs uppercase tracking-[0.25em] text-amber-500">SCHEDULE A VISIT</span>
+        </div>
+
+        <h2 className="font-serif text-4xl sm:text-5xl font-light text-primary leading-tight text-center mb-12">
+          Book Your Private Showing
+        </h2>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div>
-            <div className="${glassCard} rounded-2xl p-8">
-              <h3 className="text-2xl font-bold text-primary mb-2">Sapio Homes</h3>
-              <p className="text-amber-500 text-sm mb-4">Site Visit &amp; Apartment Tour</p>
-              <p className="text-secondary mb-4">1 hr</p>
-              <p className="text-secondary">
-                Experience the charm and convenience of our future community in person.
-                This guided visit includes exploring a model apartment, viewing the
-                construction status, and getting a feel for the amenities that will
-                define living here.
-              </p>
-            </div>
+          <div className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8">
+            <h3 className="font-serif text-2xl font-light text-primary mb-2">Sapio Homes</h3>
+            <p className="text-xs uppercase tracking-[0.25em] text-amber-500 mb-4">Site Visit &amp; Apartment Tour</p>
+            <p className="text-muted text-sm mb-4">1 hr</p>
+            <p className="text-muted text-sm leading-relaxed">
+              Experience the charm and convenience of our future community in person.
+              This guided visit includes exploring a model apartment, viewing the
+              construction status, and getting a feel for the amenities that will
+              define living here.
+            </p>
           </div>
 
-          <div className="${glassCard} rounded-2xl p-8">
-            <h3 className="text-xl font-bold text-primary mb-6">Select a Date &amp; Time</h3>
+          <div className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-amber-500 mb-6">Site Visit &amp; Apartment Tour</p>
 
             {status === "success" ? (
               <div className="text-center py-8">
                 <div className="text-4xl mb-4">&#10003;</div>
                 <p className="text-primary font-semibold mb-2">Visit Scheduled!</p>
-                <p className="text-secondary text-sm">{message}</p>
+                <p className="text-muted text-sm">{message}</p>
                 <button
                   onClick={() => {
                     setStatus("idle");
@@ -114,26 +121,26 @@ export default function SiteVisitCalendar() {
                   <button
                     onClick={prevMonth}
                     disabled={!canGoPrev}
-                    className="text-secondary hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed"
+                    className="text-muted hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                     aria-label="Previous month"
                   >
                     &larr;
                   </button>
-                  <span className="text-primary font-semibold">
+                  <span className="font-serif text-xl font-light text-primary">
                     {MONTHS[month]} {year}
                   </span>
                   <button
                     onClick={nextMonth}
-                    className="text-secondary hover:text-primary"
+                    className="text-muted hover:text-primary transition-all"
                     aria-label="Next month"
                   >
                     &rarr;
                   </button>
                 </div>
 
-                <div className="grid grid-cols-7 gap-2 mb-6">
+                <div className="grid grid-cols-7 gap-1 mb-6">
                   {DAYS.map((day) => (
-                    <div key={day} className="text-muted text-sm text-center py-2">
+                    <div key={day} className="text-xs uppercase tracking-widest text-muted text-center py-2">
                       {day}
                     </div>
                   ))}
@@ -147,12 +154,12 @@ export default function SiteVisitCalendar() {
                         key={date}
                         onClick={() => !isPast && setSelectedDate(date)}
                         disabled={isPast}
-                        className={`py-2 text-center rounded-lg transition-all ${
+                        className={`py-2 text-center rounded-lg transition-all text-sm ${
                           selectedDate === date
                             ? "bg-amber-500 text-white"
                             : isPast
-                              ? "text-muted cursor-not-allowed"
-                              : "text-secondary hover:bg-surface-hover"
+                              ? "text-muted cursor-not-allowed opacity-40"
+                              : "text-secondary hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-600"
                         }`}
                       >
                         {date}
@@ -162,7 +169,7 @@ export default function SiteVisitCalendar() {
                 </div>
 
                 <div className="mb-6">
-                  <h4 className="text-primary text-sm mb-3">Select Time</h4>
+                  <h4 className="text-sm text-muted mb-3">Select Time</h4>
                   <div className="grid grid-cols-3 gap-2">
                     {TIMES.map((time) => (
                       <button
@@ -171,7 +178,7 @@ export default function SiteVisitCalendar() {
                         className={`py-2 text-sm rounded-lg transition-all ${
                           selectedTime === time
                             ? "bg-amber-500 text-white"
-                            : "bg-white/10 backdrop-blur-md text-white/80 hover:bg-white/20"
+                            : "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-secondary hover:border-amber-400 hover:text-amber-600 transition-all"
                         }`}
                       >
                         {time}
@@ -183,7 +190,7 @@ export default function SiteVisitCalendar() {
                 <button
                   onClick={handleSchedule}
                   disabled={!selectedDate || !selectedTime || status === "submitting"}
-                  className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-all"
+                  className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-medium py-3 rounded-xl transition-all"
                 >
                   {status === "submitting" ? "Scheduling..." : "Schedule Visit"}
                 </button>

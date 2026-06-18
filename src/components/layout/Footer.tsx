@@ -5,7 +5,7 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Home, Arro
 import Link from "next/link";
 import { subscribeNewsletter } from "@/lib/api";
 
-const glassCard = "bg-white/5 dark:bg-white/5 backdrop-blur-xl border border-white/10";
+
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -26,18 +26,17 @@ export default function Footer() {
   return (
     <footer className="bg-app-bg border-t border-app-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top accent bar */}
-        <div className="h-1 w-full bg-gradient-to-r from-amber-500/40 via-amber-500 to-amber-500/40" />
+        <div className="h-px w-full bg-gray-200 dark:bg-gray-700" />
 
         <div className="py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
             {/* Brand */}
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-3 mb-5 group">
-                <div className="w-10 h-10 bg-amber-500/20 rounded-xl flex items-center justify-center border border-amber-500/30 group-hover:bg-amber-500/30 transition-all">
-                  <Home className="w-5 h-5 text-amber-400" />
+                <div className="w-10 h-10 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-200/50 dark:border-amber-500/20 group-hover:bg-amber-100 dark:group-hover:bg-amber-500/20 transition-all">
+                  <Home className="w-5 h-5 text-amber-500" />
                 </div>
-                <span className="text-xl font-bold text-primary">Sapio Homes</span>
+                <span className="font-serif text-xl font-light text-primary">Sapio Homes</span>
               </Link>
               <p className="text-secondary text-sm leading-relaxed max-w-sm mb-6">
                 Where intelligent design meets affordable luxury. Experience thoughtfully crafted
@@ -63,7 +62,7 @@ export default function Footer() {
 
             {/* Quick Links */}
             <div>
-              <h3 className="text-primary font-semibold mb-5 text-sm uppercase tracking-widest">
+              <h3 className="font-serif text-base font-medium text-primary mb-5">
                 Quick Links
               </h3>
               <ul className="space-y-3">
@@ -89,7 +88,7 @@ export default function Footer() {
 
             {/* Pages */}
             <div>
-              <h3 className="text-primary font-semibold mb-5 text-sm uppercase tracking-widest">
+              <h3 className="font-serif text-base font-medium text-primary mb-5">
                 Pages
               </h3>
               <ul className="space-y-3">
@@ -115,7 +114,7 @@ export default function Footer() {
 
             {/* Contact */}
             <div>
-              <h3 className="text-primary font-semibold mb-5 text-sm uppercase tracking-widest">
+              <h3 className="font-serif text-base font-medium text-primary mb-5">
                 Contact
               </h3>
               <ul className="space-y-4">
@@ -142,10 +141,10 @@ export default function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div className={`${glassCard} rounded-2xl p-6 mt-12`}>
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 mt-12">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
               <div className="flex-1">
-                <h4 className="text-primary font-semibold mb-1">Stay Updated</h4>
+                <h4 className="font-serif text-lg font-light text-primary mb-1">Stay Updated</h4>
                 <p className="text-secondary text-sm">
                   Subscribe to get updates on new properties and exclusive offers.
                 </p>
@@ -162,13 +161,13 @@ export default function Footer() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email address"
-                      className="flex-1 bg-app-bg border border-app-border/60 rounded-l-xl px-4 py-2.5 text-primary text-sm placeholder-muted focus:outline-none focus:border-amber-500 transition-colors"
+                      className="flex-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-l-xl px-4 py-2.5 text-primary text-sm placeholder:text-muted focus:outline-none focus:border-amber-400 transition-colors"
                       onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
                     />
                     <button
                       onClick={handleSubscribe}
                       disabled={subStatus === "submitting" || !email}
-                      className="bg-amber-500 hover:bg-amber-600 disabled:bg-gray-500 disabled:cursor-not-allowed px-5 py-2.5 rounded-r-xl text-white text-sm font-medium transition-all"
+                      className="bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed px-5 py-2.5 rounded-r-xl text-white text-sm font-medium transition-all"
                     >
                       {subStatus === "submitting" ? "Sending..." : "Subscribe"}
                     </button>

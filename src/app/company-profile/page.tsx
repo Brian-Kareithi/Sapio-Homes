@@ -3,8 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Shield, Award, Users, TrendingUp, Building, Globe } from "lucide-react";
 
-const glassCard = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
-
 export const metadata: Metadata = {
   title: "Company Profile | Sapio Homes",
   description: "Learn about Sapio Homes — Nairobi's trusted real estate developer offering affordable luxury apartments, property management, and investment opportunities.",
@@ -19,7 +17,7 @@ export default function CompanyProfilePage() {
         </Link>
         {/* Hero */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
+          <h1 className="font-serif text-4xl sm:text-5xl font-light text-primary mb-4">
             Company Profile
           </h1>
           <p className="text-secondary max-w-3xl mx-auto text-lg">
@@ -32,7 +30,7 @@ export default function CompanyProfilePage() {
         {/* About Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
           <div>
-            <h2 className="text-3xl font-bold text-primary mb-6">Who We Are</h2>
+            <h2 className="font-serif text-3xl font-light text-primary mb-6">Who We Are</h2>
             <p className="text-secondary mb-4 leading-relaxed">
               Founded with a vision to bridge the gap between luxury and affordability, Sapio Homes
               has grown into one of Nairobi&apos;s most respected property developers. We specialize
@@ -70,7 +68,7 @@ export default function CompanyProfilePage() {
             { value: "6+", label: "Active Projects" },
             { value: "12+", label: "Years Experience" },
           ].map((s) => (
-            <div key={s.label} className={`${glassCard} rounded-2xl p-6 text-center`}>
+            <div key={s.label} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
               <div className="text-3xl font-bold text-amber-400 mb-2">{s.value}</div>
               <div className="text-sm text-secondary">{s.label}</div>
             </div>
@@ -78,7 +76,7 @@ export default function CompanyProfilePage() {
         </div>
 
         {/* Values */}
-        <h2 className="text-3xl font-bold text-primary text-center mb-10">Our Core Values</h2>
+        <h2 className="font-serif text-3xl font-light text-primary text-center mb-10">Our Core Values</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
           {[
             {
@@ -114,8 +112,8 @@ export default function CompanyProfilePage() {
           ].map((v) => {
             const Icon = v.icon;
             return (
-              <div key={v.title} className={`${glassCard} rounded-2xl p-6`}>
-                <div className="w-12 h-12 bg-amber-500/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-4 border border-amber-500/20">
+              <div key={v.title} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+                <div className="w-12 h-12 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 border border-amber-500/20">
                   <Icon className="w-6 h-6 text-amber-400" />
                 </div>
                 <h3 className="text-lg font-bold text-primary mb-2">{v.title}</h3>
@@ -126,8 +124,8 @@ export default function CompanyProfilePage() {
         </div>
 
         {/* Google Business Info */}
-        <div className={`${glassCard} rounded-2xl p-8 mb-20`}>
-          <h2 className="text-2xl font-bold text-primary mb-6">Find Us on Google</h2>
+        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 mb-20 shadow-sm"}>
+          <h2 className="font-serif text-2xl font-light text-primary mb-6">Find Us on Google</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <p className="text-secondary mb-4 leading-relaxed">
@@ -177,7 +175,7 @@ export default function CompanyProfilePage() {
 
         {/* CTA */}
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-primary mb-4">Ready to Work With Us?</h2>
+          <h2 className="font-serif text-2xl font-light text-primary mb-4">Ready to Work With Us?</h2>
           <p className="text-secondary mb-6 max-w-xl mx-auto">
             Whether you&apos;re looking to buy, sell, rent, or invest, our team is here to help.
           </p>

@@ -39,17 +39,20 @@ const features = [
   },
 ];
 
-const glassCard = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
-
 export default function FeaturedProjects() {
   return (
     <section className="py-20 bg-app-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">
-            Why Choose Sapio Homes
+        <div className="text-center mb-14">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <span className="h-px w-8 bg-amber-400" />
+            <span className="text-xs uppercase tracking-[0.25em] text-amber-500">WHY CHOOSE US</span>
+            <span className="h-px w-8 bg-amber-400" />
+          </div>
+          <h2 className="font-serif text-4xl sm:text-5xl font-light text-primary leading-tight mb-5">
+            Designed for a Life of Distinction
           </h2>
-          <p className="text-secondary max-w-2xl mx-auto">
+          <p className="text-secondary/70 max-w-2xl mx-auto">
             We bring together design, location, and value to create homes that truly work for you.
           </p>
         </div>
@@ -60,13 +63,13 @@ export default function FeaturedProjects() {
             return (
               <div
                 key={index}
-                className={`${glassCard} rounded-2xl p-8 text-center group hover:border-amber-500/50 transition-all duration-300`}
+                className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8 text-center hover:border-amber-400/30 transition-all duration-500"
               >
-                <div className="w-16 h-16 bg-amber-500/20 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform border border-amber-500/20">
-                  <Icon className="w-8 h-8 text-amber-400" />
+                <div className="w-16 h-16 bg-amber-50 dark:bg-amber-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-amber-200/50 dark:border-amber-500/20">
+                  <Icon className="w-7 h-7 text-amber-500" />
                 </div>
-                <h3 className="text-xl font-bold text-primary mb-4">{feature.title}</h3>
-                <p className="text-secondary text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="font-serif text-xl font-medium text-primary mb-3">{feature.title}</h3>
+                <p className="text-secondary/70 text-sm leading-relaxed">{feature.description}</p>
               </div>
             );
           })}

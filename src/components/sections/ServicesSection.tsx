@@ -50,21 +50,21 @@ const stats = [
   { label: "Happy Clients", value: 980, suffix: "+" },
 ];
 
-const glassCard = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
-
 export default function ServicesSection() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
     <section className="py-20 bg-app-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary mb-4">Our Services</h2>
-          <p className="text-secondary max-w-3xl mx-auto">
-            Comprehensive real estate solutions tailored to your needs — from development to
-            property management, we handle every aspect of the journey.
-          </p>
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <span className="h-px w-8 bg-amber-400" />
+          <span className="text-xs uppercase tracking-[0.25em] text-amber-500">WHAT WE OFFER</span>
+          <span className="h-px w-8 bg-amber-400" />
         </div>
+
+        <h2 className="font-serif text-4xl sm:text-5xl font-light text-primary leading-tight text-center mb-16">
+          Our Services
+        </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {services.map((service, index) => {
@@ -72,33 +72,33 @@ export default function ServicesSection() {
             return (
               <div
                 key={index}
-                className={`${glassCard} rounded-2xl p-6 group hover:border-amber-500/50 transition-all duration-300`}
+                className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8"
               >
-                <div className="w-12 h-12 bg-amber-500/20 backdrop-blur-md rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform border border-amber-500/20">
-                  <Icon className="w-6 h-6 text-amber-400" />
+                <div className="w-12 h-12 bg-amber-50 dark:bg-amber-500/10 rounded-2xl flex items-center justify-center mb-5 border border-amber-200/50 dark:border-amber-500/20">
+                  <Icon className="w-6 h-6 text-amber-500" />
                 </div>
-                <h3 className="text-xl font-semibold text-primary mb-3">{service.title}</h3>
-                <p className="text-secondary text-sm leading-relaxed">{service.description}</p>
+                <h3 className="font-serif text-xl font-medium text-primary mb-3">{service.title}</h3>
+                <p className="text-secondary/80 text-sm leading-relaxed">{service.description}</p>
               </div>
             );
           })}
         </div>
 
-        <div ref={ref} className={`${glassCard} rounded-2xl p-8`}>
-          <h3 className="text-2xl font-bold text-primary text-center mb-8">
+        <div ref={ref} className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-10">
+          <h3 className="font-serif text-3xl font-light text-primary text-center mb-10">
             We are on course to delivering over 1,300 units
           </h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl sm:text-5xl font-bold text-amber-400">
+                <div className="font-serif text-5xl font-light text-amber-500">
                   {inView ? (
                     <CountUp end={stat.value} duration={2.5} suffix={stat.suffix} />
                   ) : (
                     <span>&nbsp;</span>
                   )}
                 </div>
-                <div className="text-secondary mt-2 text-sm">{stat.label}</div>
+                <div className="text-xs uppercase tracking-widest text-muted mt-3">{stat.label}</div>
               </div>
             ))}
           </div>

@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, Building, BadgePercent, TrendingUp, Search, Filter } from "lucide-react";
 
-const glassCard = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
-
 export const metadata: Metadata = {
   title: "Properties | Sapio Homes",
   description: "Browse Sapio Homes property listings. Find apartments for sale and rent in Nairobi. Studios, 1BR, 2BR, and luxury residences in prime locations.",
@@ -44,8 +42,11 @@ export default function PropertiesPage() {
   return (
     <main className="bg-app-bg min-h-screen pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
+          &larr; Back to Home
+        </Link>
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">
+          <h1 className="font-serif text-4xl sm:text-5xl font-light text-primary mb-4">
             Properties
           </h1>
           <p className="text-secondary max-w-3xl mx-auto text-lg">
@@ -62,7 +63,7 @@ export default function PropertiesPage() {
             { label: "On Show", value: "8" },
             { label: "Sold 2024", value: "120+" },
           ].map((s) => (
-            <div key={s.label} className={`${glassCard} rounded-2xl p-6 text-center`}>
+            <div key={s.label} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
               <div className="text-3xl font-bold text-amber-400 mb-1">{s.value}</div>
               <div className="text-sm text-secondary">{s.label}</div>
             </div>
@@ -77,10 +78,10 @@ export default function PropertiesPage() {
               <Link
                 key={pt.title}
                 href={pt.link}
-                className={`${glassCard} rounded-2xl p-6 group hover:border-amber-500/50 transition-all duration-300`}
+                className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm group hover:border-amber-500/50 transition-all duration-300"}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 bg-amber-500/20 backdrop-blur-md rounded-2xl flex items-center justify-center flex-shrink-0 border border-amber-500/20 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 bg-amber-50 dark:bg-amber-500/10 rounded-2xl flex items-center justify-center flex-shrink-0 border border-amber-500/20 group-hover:scale-110 transition-transform">
                     <Icon className="w-7 h-7 text-amber-400" />
                   </div>
                   <div className="flex-1">
@@ -102,10 +103,10 @@ export default function PropertiesPage() {
         </div>
 
         {/* Property Type Filter */}
-        <div className={`${glassCard} rounded-2xl p-8 mb-16`}>
+        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 mb-16 shadow-sm"}>
           <div className="flex items-center gap-3 mb-6">
             <Filter className="w-5 h-5 text-amber-400" />
-            <h2 className="text-xl font-bold text-primary">Browse by Type</h2>
+            <h2 className="font-serif text-xl font-medium text-primary">Browse by Type</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {[
@@ -118,7 +119,7 @@ export default function PropertiesPage() {
               <Link
                 key={t.type}
                 href={`/#properties?type=${t.type.toLowerCase().replace(/\s+/g, "").replace("+", "bed")}`}
-                className={`${glassCard} rounded-2xl p-4 text-center hover:border-amber-500/50 transition-all`}
+                className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center hover:border-amber-500/50 transition-all shadow-sm"}
               >
                 <div className="text-lg font-bold text-primary">{t.type}</div>
                 <div className="text-sm text-muted">{t.count} listings</div>
@@ -128,9 +129,9 @@ export default function PropertiesPage() {
         </div>
 
         {/* CTA */}
-        <div className={`${glassCard} rounded-2xl p-8 text-center`}>
+        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center shadow-sm"}>
           <Search className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-primary mb-4">
+          <h2 className="font-serif text-2xl font-light text-primary mb-4">
             Can&apos;t Find What You&apos;re Looking For?
           </h2>
           <p className="text-secondary mb-6 max-w-xl mx-auto">
