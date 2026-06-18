@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
@@ -18,30 +19,33 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { name: "Home", href: "#home", dropdown: null },
+  { name: "Home", href: "/", dropdown: null },
   {
     name: "About Us",
-    href: "#about",
+    href: "/company-profile",
     dropdown: [
-      { name: "Manifesto", href: "#manifesto" },
-      { name: "Our Mission", href: "#mission" },
-      { name: "Our Vision", href: "#vision" },
+      { name: "Our Team", href: "/team" },
+      { name: "Careers", href: "/careers" },
     ],
   },
   {
     name: "Properties",
-    href: "#properties",
+    href: "/properties",
     dropdown: [
-      { name: "Park Road Residency", href: "#park-road" },
-      { name: "Hillside Gardens", href: "#hillside" },
-      { name: "Westway Apartments", href: "#westway" },
+      { name: "Property Management", href: "/property-management" },
     ],
   },
-  { name: "Blog", href: "#blog", dropdown: null },
-  { name: "Contact", href: "#contact", dropdown: null },
+  {
+    name: "Services",
+    href: "/#services",
+    dropdown: null,
+  },
+  { name: "Contact", href: "/#contact", dropdown: null },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -58,6 +62,7 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    if (!isHome) return;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -72,7 +77,7 @@ export default function Navbar() {
     const sections = document.querySelectorAll("section[id]");
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -88,22 +93,27 @@ export default function Navbar() {
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
+      document.documentElement.classList.add("overflow-hidden");
     } else {
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("overflow-hidden");
     }
     return () => {
-      document.body.style.overflow = "";
+      document.documentElement.classList.remove("overflow-hidden");
     };
   }, [isMobileMenuOpen]);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const navigate = (href: string) => {
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
+    if (href.startsWith("/#")) {
+      const id = href.replace("/#", "");
+      if (pathname === "/") {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.location.href = href;
+      }
+    }
   };
 
   const handleMouseEnter = (itemName: string) => {
@@ -139,9 +149,12 @@ export default function Navbar() {
   }, []);
 
   const isActive = (href: string) => {
-    const id = href.replace("#", "");
-    return activeSection === id;
+    if (href === "/") return pathname === "/" && !isScrolled;
+    if (href.startsWith("/#")) return activeSection === href.replace("/#", "");
+    return pathname === href;
   };
+
+  const isHashLink = (href: string) => href.startsWith("/#");
 
   return (
     <>
@@ -154,10 +167,12 @@ export default function Navbar() {
           className={`transition-all duration-500 ${
             isScrolled
               ? "w-full bg-app-bg/85 backdrop-blur-2xl border-b border-app-border/60 shadow-[0_0_24px_rgba(212,168,71,0.1)]"
-              : "max-w-7xl mx-auto bg-white/80 dark:bg-black/30 rounded-2xl"
+              : isHome
+                ? "w-full bg-transparent"
+                : "w-full bg-app-bg/85 backdrop-blur-2xl border-b border-app-border/60"
           }`}
         >
-          <div className={`${isScrolled ? "px-4 sm:px-6 lg:px-8" : "px-4 sm:px-6 lg:px-8"}`}>
+          <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20">
               <Link href="/" className="flex items-center space-x-3 group pr-4 sm:pr-6 border-r border-app-border/50">
                 <div className="relative w-10 h-10 sm:w-12 sm:h-12">
@@ -183,36 +198,45 @@ export default function Navbar() {
                     onMouseEnter={() => item.dropdown && handleMouseEnter(item.name)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <button
-                      onClick={() => scrollToSection(item.href)}
-                      onKeyDown={(e) => item.dropdown && handleDropdownKeyDown(e, item.name)}
-                      className={`
-                        relative flex items-center space-x-1 px-4 py-2 transition-all duration-300 rounded-full group
-                        ${isActive(item.href)
-                          ? "text-amber-500 bg-amber-500/10"
-                          : "text-secondary hover:text-primary hover:bg-surface-hover"
-                        }
-                      `}
-                      aria-expanded={item.dropdown ? openDropdown === item.name : undefined}
-                      aria-haspopup={item.dropdown ? "true" : undefined}
-                    >
-                      <span className="text-sm lg:text-base relative">
-                        {item.name}
-                        <span
-                          className={`
-                            absolute -bottom-0.5 left-0 h-0.5 bg-amber-500 transition-all duration-300 rounded-full
-                            ${isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"}
-                          `}
-                        />
-                      </span>
-                      {item.dropdown && (
-                        <ChevronDown
-                          className={`w-3.5 h-3.5 transition-all duration-300 ${
-                            openDropdown === item.name ? "rotate-180" : ""
-                          }`}
-                        />
-                      )}
-                    </button>
+                    {isHashLink(item.href) ? (
+                      <button
+                        onClick={() => navigate(item.href)}
+                        className={`
+                          relative flex items-center space-x-1 px-4 py-2 transition-all duration-300 rounded-full group
+                          ${isActive(item.href)
+                            ? "text-amber-500 bg-amber-500/10"
+                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                          }
+                        `}
+                      >
+                        <span className="text-sm lg:text-base relative">
+                          {item.name}
+                          <span className={`absolute -bottom-0.5 left-0 h-0.5 bg-amber-500 transition-all duration-300 rounded-full ${isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"}`} />
+                        </span>
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        className={`
+                          relative flex items-center space-x-1 px-4 py-2 transition-all duration-300 rounded-full group
+                          ${isActive(item.href)
+                            ? "text-amber-500 bg-amber-500/10"
+                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                          }
+                        `}
+                        onKeyDown={(e) => item.dropdown && handleDropdownKeyDown(e, item.name)}
+                        aria-expanded={item.dropdown ? openDropdown === item.name : undefined}
+                        aria-haspopup={item.dropdown ? "true" : undefined}
+                      >
+                        <span className="text-sm lg:text-base relative">
+                          {item.name}
+                          <span className={`absolute -bottom-0.5 left-0 h-0.5 bg-amber-500 transition-all duration-300 rounded-full ${isActive(item.href) ? "w-full" : "w-0 group-hover:w-full"}`} />
+                        </span>
+                        {item.dropdown && (
+                          <ChevronDown className={`w-3.5 h-3.5 transition-all duration-300 ${openDropdown === item.name ? "rotate-180" : ""}`} />
+                        )}
+                      </Link>
+                    )}
 
                     {item.dropdown && openDropdown === item.name && (
                       <div
@@ -222,16 +246,16 @@ export default function Navbar() {
                         role="menu"
                       >
                         <div className="py-2">
-                          {item.dropdown.map((dropdownItem, idx) => (
-                            <button
+                          {item.dropdown.map((dropdownItem) => (
+                            <Link
                               key={dropdownItem.name}
-                              onClick={() => scrollToSection(dropdownItem.href)}
+                              href={dropdownItem.href}
                               className="block w-full text-left px-5 py-2.5 text-secondary hover:text-amber-500 hover:bg-amber-500/5 transition-all duration-200 text-sm"
                               role="menuitem"
-                              style={idx < (item.dropdown as DropdownItem[]).length - 1 ? { borderBottom: "1px solid rgba(255,255,255,0.04)" } : {}}
+                              onClick={() => { setIsMobileMenuOpen(false); setOpenDropdown(null); }}
                             >
                               {dropdownItem.name}
-                            </button>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -294,42 +318,51 @@ export default function Navbar() {
               <div className="flex-1 overflow-y-auto py-3 px-3">
                 {navItems.map((item) => (
                   <div key={item.name} className="mb-1">
-                    <button
-                      onClick={() => {
-                        if (item.dropdown) {
-                          setOpenDropdown(openDropdown === item.name ? null : item.name);
-                        } else {
-                          scrollToSection(item.href);
-                        }
-                      }}
-                      className={`
-                        flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-200
-                        ${isActive(item.href)
-                          ? "text-amber-500 bg-amber-500/10"
-                          : "text-secondary hover:text-primary hover:bg-surface-hover"
-                        }
-                      `}
-                      aria-expanded={item.dropdown ? openDropdown === item.name : undefined}
-                    >
-                      <span className="text-sm font-medium">{item.name}</span>
-                      {item.dropdown && (
-                        <ChevronDown
-                          className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                            openDropdown === item.name ? "rotate-180" : ""
-                          }`}
-                        />
-                      )}
-                    </button>
+                    {isHashLink(item.href) ? (
+                      <button
+                        onClick={() => navigate(item.href)}
+                        className={`
+                          flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-200
+                          ${isActive(item.href)
+                            ? "text-amber-500 bg-amber-500/10"
+                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                          }
+                        `}
+                      >
+                        <span className="text-sm font-medium">{item.name}</span>
+                      </button>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={() => { setIsMobileMenuOpen(false); setOpenDropdown(null); }}
+                        className={`
+                          flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-200
+                          ${isActive(item.href)
+                            ? "text-amber-500 bg-amber-500/10"
+                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                          }
+                        `}
+                      >
+                        <span className="text-sm font-medium">{item.name}</span>
+                        {item.dropdown && (
+                          <ChevronDown
+                            className={`w-3.5 h-3.5 transition-transform duration-200 ${openDropdown === item.name ? "rotate-180" : ""}`}
+                            onClick={(e) => { e.preventDefault(); setOpenDropdown(openDropdown === item.name ? null : item.name); }}
+                          />
+                        )}
+                      </Link>
+                    )}
                     {item.dropdown && openDropdown === item.name && (
                       <div className="ml-3 mt-1 mb-2 bg-surface rounded-xl overflow-hidden">
                         {item.dropdown.map((dropdownItem) => (
-                          <button
+                          <Link
                             key={dropdownItem.name}
-                            onClick={() => scrollToSection(dropdownItem.href)}
+                            href={dropdownItem.href}
+                            onClick={() => { setIsMobileMenuOpen(false); setOpenDropdown(null); }}
                             className="block w-full text-left px-4 py-2.5 text-muted hover:text-primary hover:bg-surface-hover transition-all duration-200 text-sm"
                           >
                             {dropdownItem.name}
-                          </button>
+                          </Link>
                         ))}
                       </div>
                     )}

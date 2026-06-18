@@ -14,6 +14,9 @@ export default function CompanyProfilePage() {
   return (
     <main className="bg-app-bg min-h-screen pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
+          &larr; Back to Home
+        </Link>
         {/* Hero */}
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl font-bold text-primary mb-4">

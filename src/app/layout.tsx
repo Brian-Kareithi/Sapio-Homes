@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import SkipToContent from "@/components/layout/SkipToContent";
@@ -42,32 +41,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`
-            (function() {
-              try {
-                var theme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.classList.toggle('dark', theme === 'dark');
-              } catch(e) {}
-            })();
-          `}
-        </Script>
-        <Script id="loading-failsafe" strategy="beforeInteractive">
-          {`
-            (function() {
-              document.documentElement.classList.add('overflow-hidden');
-              setTimeout(function() {
-                var el = document.getElementById('loading-screen');
-                if (el) {
-                  el.style.display = 'none';
-                }
-                document.documentElement.classList.remove('overflow-hidden');
-              }, 3000);
-            })();
-          `}
-        </Script>
+        <script src="/theme-init.js" />
+        <script src="/loading-failsafe.js" />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
           <LoadingScreen />
           <SkipToContent />
