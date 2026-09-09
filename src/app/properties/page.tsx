@@ -40,7 +40,7 @@ const propertyTypes = [
 
 export default function PropertiesPage() {
   return (
-    <main className="bg-app-bg min-h-screen pt-24">
+    <div className="min-h-screen pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
           &larr; Back to Home
@@ -63,7 +63,7 @@ export default function PropertiesPage() {
             { label: "On Show", value: "8" },
             { label: "Sold 2024", value: "120+" },
           ].map((s) => (
-            <div key={s.label} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
+            <div key={s.label} className={"u-card p-6 text-center"}>
               <div className="text-3xl font-bold text-amber-400 mb-1">{s.value}</div>
               <div className="text-sm text-secondary">{s.label}</div>
             </div>
@@ -78,7 +78,7 @@ export default function PropertiesPage() {
               <Link
                 key={pt.title}
                 href={pt.link}
-                className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm group hover:border-amber-500/50 transition-all duration-300"}
+                className={"u-card p-6 shadow-sm group hover:border-amber-500/50 transition-all duration-300"}
               >
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 bg-amber-50 dark:bg-amber-500/10 rounded-2xl flex items-center justify-center flex-shrink-0 border border-amber-500/20 group-hover:scale-110 transition-transform">
@@ -103,7 +103,7 @@ export default function PropertiesPage() {
         </div>
 
         {/* Property Type Filter */}
-        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 mb-16 shadow-sm"}>
+        <div className={"u-card p-8 mb-16"}>
           <div className="flex items-center gap-3 mb-6">
             <Filter className="w-5 h-5 text-amber-400" />
             <h2 className="font-serif text-xl font-medium text-primary">Browse by Type</h2>
@@ -119,7 +119,7 @@ export default function PropertiesPage() {
               <Link
                 key={t.type}
                 href={`/#properties?type=${t.type.toLowerCase().replace(/\s+/g, "").replace("+", "bed")}`}
-                className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-4 text-center hover:border-amber-500/50 transition-all shadow-sm"}
+                className={"u-card p-4 text-center hover:border-amber-500/50 transition-all"}
               >
                 <div className="text-lg font-bold text-primary">{t.type}</div>
                 <div className="text-sm text-muted">{t.count} listings</div>
@@ -129,7 +129,7 @@ export default function PropertiesPage() {
         </div>
 
         {/* CTA */}
-        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center shadow-sm"}>
+        <div className={"u-card p-8 text-center"}>
           <Search className="w-8 h-8 text-amber-400 mx-auto mb-4" />
           <h2 className="font-serif text-2xl font-light text-primary mb-4">
             Can&apos;t Find What You&apos;re Looking For?
@@ -139,12 +139,12 @@ export default function PropertiesPage() {
           </p>
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-3 rounded-xl transition-all"
+            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-semibold px-8 py-3 rounded-xl transition-all"
           >
             Contact Us
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

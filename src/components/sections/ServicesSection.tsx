@@ -3,6 +3,7 @@
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { Home, Building2, TrendingUp, Shield, Key, BarChart3 } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const services = [
   {
@@ -44,61 +45,57 @@ const services = [
 ];
 
 const stats = [
-  { label: "Completed in 2024", value: 450, suffix: " units" },
-  { label: "Ongoing for 2025", value: 374, suffix: " units" },
-  { label: "Ongoing for 2026", value: 700, suffix: " units" },
-  { label: "Happy Clients", value: 980, suffix: "+" },
+  { label: "Completed in 2024", value: 120, suffix: "+" },
+  { label: "Ongoing for 2025", value: 540, suffix: "" },
+  { label: "Ongoing for 2026", value: 640, suffix: "" },
+  { label: "Client Satisfaction", value: 98, suffix: "%" },
 ];
 
 export default function ServicesSection() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.3 });
 
   return (
-    <section className="py-20 bg-app-secondary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="h-px w-8 bg-amber-400" />
-          <span className="text-xs uppercase tracking-[0.25em] text-amber-500">WHAT WE OFFER</span>
-          <span className="h-px w-8 bg-amber-400" />
-        </div>
+    <section id="services" className="scroll-mt-24 bg-app-secondary py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="What We Offer"
+          title="A full-service real estate partner"
+          description="From the first site visit to the final title transfer, every stage is handled by one accountable team."
+        />
 
-        <h2 className="font-serif text-4xl sm:text-5xl font-light text-primary leading-tight text-center mb-16">
-          Our Services
-        </h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <div
-                key={index}
-                className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8"
-              >
-                <div className="w-12 h-12 bg-amber-50 dark:bg-amber-500/10 rounded-2xl flex items-center justify-center mb-5 border border-amber-200/50 dark:border-amber-500/20">
-                  <Icon className="w-6 h-6 text-amber-500" />
+              <div key={index} className="u-card u-card-interactive group p-8">
+                <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl border border-amber-200/60 bg-amber-50 text-amber-500 transition-colors duration-300 group-hover:bg-amber-500 group-hover:text-black dark:border-amber-500/20">
+                  <Icon className="h-6 w-6" />
                 </div>
-                <h3 className="font-serif text-xl font-medium text-primary mb-3">{service.title}</h3>
-                <p className="text-secondary/80 text-sm leading-relaxed">{service.description}</p>
+                <h3 className="mb-3 font-serif text-xl font-medium text-primary">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-secondary">{service.description}</p>
               </div>
             );
           })}
         </div>
 
-        <div ref={ref} className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-10">
-          <h3 className="font-serif text-3xl font-light text-primary text-center mb-10">
-            We are on course to delivering over 1,300 units
+        <div ref={ref} className="u-card mt-20 p-10 sm:p-14">
+          <h3 className="text-center font-serif text-3xl font-light text-primary">
+            On course to deliver over <span className="italic text-amber-500">1,300 units</span>
           </h3>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
+          <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-4">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="font-serif text-5xl font-light text-amber-500">
+                <div className="font-serif text-4xl font-light text-amber-500 sm:text-5xl">
                   {inView ? (
                     <CountUp end={stat.value} duration={2.5} suffix={stat.suffix} />
                   ) : (
                     <span>&nbsp;</span>
                   )}
                 </div>
-                <div className="text-xs uppercase tracking-widest text-muted mt-3">{stat.label}</div>
+                <span className="mx-auto mt-4 block h-px w-8 bg-amber-400/40" />
+                <div className="mt-3 text-[0.6875rem] uppercase tracking-[0.18em] text-muted">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>

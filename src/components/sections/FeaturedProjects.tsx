@@ -1,4 +1,5 @@
 import { Leaf, Sparkles, MapPin, Building, Star, Trees } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const features = [
   {
@@ -41,35 +42,24 @@ const features = [
 
 export default function FeaturedProjects() {
   return (
-    <section className="py-20 bg-app-bg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <span className="h-px w-8 bg-amber-400" />
-            <span className="text-xs uppercase tracking-[0.25em] text-amber-500">WHY CHOOSE US</span>
-            <span className="h-px w-8 bg-amber-400" />
-          </div>
-          <h2 className="font-serif text-4xl sm:text-5xl font-light text-primary leading-tight mb-5">
-            Designed for a Life of Distinction
-          </h2>
-          <p className="text-secondary/70 max-w-2xl mx-auto">
-            We bring together design, location, and value to create homes that truly work for you.
-          </p>
-        </div>
+    <section className="bg-app-secondary py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="Why Choose Us"
+          title="Designed for a life of distinction"
+          description="We bring together design, location, and value to create homes that truly work for you."
+        />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div
-                key={index}
-                className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8 text-center hover:border-amber-400/30 transition-all duration-500"
-              >
-                <div className="w-16 h-16 bg-amber-50 dark:bg-amber-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-amber-200/50 dark:border-amber-500/20">
-                  <Icon className="w-7 h-7 text-amber-500" />
+              <div key={index} className="u-card u-card-interactive group p-8 text-center">
+                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-amber-200/60 bg-amber-50 text-amber-500 transition-colors duration-300 group-hover:bg-amber-500 group-hover:text-black dark:border-amber-500/20">
+                  <Icon className="h-7 w-7" />
                 </div>
-                <h3 className="font-serif text-xl font-medium text-primary mb-3">{feature.title}</h3>
-                <p className="text-secondary/70 text-sm leading-relaxed">{feature.description}</p>
+                <h3 className="mb-3 font-serif text-xl font-medium text-primary">{feature.title}</h3>
+                <p className="text-sm leading-relaxed text-secondary">{feature.description}</p>
               </div>
             );
           })}

@@ -21,25 +21,33 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: "Home", href: "/", dropdown: null },
   {
-    name: "About Us",
+    name: "About",
     href: "/company-profile",
     dropdown: [
+      { name: "Company Profile", href: "/company-profile" },
       { name: "Our Team", href: "/team" },
       { name: "Careers", href: "/careers" },
     ],
   },
   {
-    name: "Properties",
-    href: "/properties",
+    name: "Projects",
+    href: "/projects",
     dropdown: [
-      { name: "Property Management", href: "/property-management" },
+      { name: "All Projects", href: "/projects" },
+      { name: "Park Road Residency", href: "/projects/park-road-residency" },
+      { name: "Westway Apartments", href: "/projects/westway-apartments" },
+      { name: "Hillside Gardens", href: "/projects/hillside-gardens" },
     ],
   },
   {
     name: "Services",
     href: "/#services",
-    dropdown: null,
+    dropdown: [
+      { name: "Property Management", href: "/property-management" },
+      { name: "All Properties", href: "/properties" },
+    ],
   },
+  { name: "FAQ", href: "/faq", dropdown: null },
   { name: "Contact", href: "/#contact", dropdown: null },
 ];
 
@@ -157,6 +165,11 @@ export default function Navbar() {
 
   const isHashLink = (href: string) => href.startsWith("/#");
 
+  const onDark = isHome && !isScrolled;
+  const idleLink = onDark
+    ? "text-white/80 hover:text-white hover:bg-white/10"
+    : "text-secondary hover:text-primary hover:bg-surface-hover";
+
   return (
     <>
       <nav
@@ -167,26 +180,30 @@ export default function Navbar() {
         <div
           className={`transition-all duration-500 ${
             isScrolled
-              ? "w-full bg-app-bg/85 backdrop-blur-2xl border-b border-app-border/60 shadow-[0_0_24px_rgba(212,168,71,0.1)]"
+              ? "w-full border-b border-app-border/70 bg-app-bg/80 backdrop-blur-xl"
               : isHome
-                ? "w-full bg-transparent"
-                : "w-full bg-app-bg/85 backdrop-blur-2xl border-b border-app-border/60"
+                ? "w-full bg-gradient-to-b from-black/40 to-transparent"
+                : "w-full border-b border-app-border/70 bg-app-bg/80 backdrop-blur-xl"
           }`}
         >
           <div className="px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16 sm:h-20">
-              <Link href="/" className="flex items-center space-x-3 group pr-4 sm:pr-6 border-r border-app-border/50">
-                <div className="relative w-10 h-10 sm:w-12 sm:h-12">
+              <Link href="/" className="flex items-center space-x-3 group">
+                <div className="relative w-10 h-10 sm:w-11 sm:h-11">
                   <Image
                     src="https://ppkfgsakvcijmmhjwbcz.supabase.co/storage/v1/object/public/Photos/SOLD-BY_Sapio-homes-logo.png"
                     alt="Sapio Homes"
                     fill
                     className="object-contain"
-                    sizes="(max-width: 640px) 40px, 48px"
+                    sizes="(max-width: 640px) 40px, 44px"
                     priority
                   />
                 </div>
-                <span className="text-primary text-lg sm:text-xl font-bold hidden sm:block group-hover:text-amber-500 transition-all duration-300">
+                <span
+                  className={`hidden font-serif text-xl font-medium tracking-tight transition-colors duration-300 sm:block group-hover:text-amber-500 ${
+                    isHome && !isScrolled ? "text-white" : "text-primary"
+                  }`}
+                >
                   Sapio Homes
                 </span>
               </Link>
@@ -206,7 +223,7 @@ export default function Navbar() {
                           relative flex items-center space-x-1 px-4 py-2 transition-all duration-300 rounded-full group
                           ${isActive(item.href)
                             ? "text-amber-500 bg-amber-500/10"
-                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                            : idleLink
                           }
                         `}
                       >
@@ -222,7 +239,7 @@ export default function Navbar() {
                           relative flex items-center space-x-1 px-4 py-2 transition-all duration-300 rounded-full group
                           ${isActive(item.href)
                             ? "text-amber-500 bg-amber-500/10"
-                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                            : idleLink
                           }
                         `}
                         onKeyDown={(e) => item.dropdown && handleDropdownKeyDown(e, item.name)}
@@ -263,9 +280,15 @@ export default function Navbar() {
                     )}
                   </div>
                 ))}
-                <div className="ml-2 pl-2 border-l border-app-border/50">
+                <div className={`ml-2 pl-2 border-l ${onDark ? "border-white/20" : "border-app-border/50"}`}>
                   <ThemeToggle />
                 </div>
+                <button
+                  onClick={() => navigate("/#contact")}
+                  className="ml-3 rounded-full bg-amber-500 px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-black transition-all duration-300 hover:bg-amber-400"
+                >
+                  Book a Viewing
+                </button>
               </div>
 
               <div className="flex items-center space-x-2 md:hidden">
@@ -326,7 +349,7 @@ export default function Navbar() {
                           flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-200
                           ${isActive(item.href)
                             ? "text-amber-500 bg-amber-500/10"
-                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                            : idleLink
                           }
                         `}
                       >
@@ -340,7 +363,7 @@ export default function Navbar() {
                           flex items-center justify-between w-full px-4 py-3 rounded-xl transition-all duration-200
                           ${isActive(item.href)
                             ? "text-amber-500 bg-amber-500/10"
-                            : "text-secondary hover:text-primary hover:bg-surface-hover"
+                            : idleLink
                           }
                         `}
                       >
@@ -373,7 +396,7 @@ export default function Navbar() {
 
               <div className="p-4 border-t border-app-border/50">
                 <p className="text-muted text-xs text-center">
-                  &copy; 2025 Sapio Homes
+                  &copy; {new Date().getFullYear()} Sapio Homes
                 </p>
               </div>
             </div>

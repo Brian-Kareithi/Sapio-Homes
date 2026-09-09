@@ -1,3 +1,5 @@
+import { projects as portfolioProjects } from "@/lib/projects";
+
 export interface SearchFilters {
   type: string;
   budget: string;
@@ -11,7 +13,27 @@ export interface Project {
   location: string;
   status: string;
   tags: string[];
+  slug: string;
 }
+
+const TAGS: Record<string, string[]> = {
+  "park-road-residency": ["1bed", "furnished", "park-road"],
+  "westway-apartments": ["studio", "1bed", "2bed", "nairobi-west"],
+  "hillside-gardens": ["3bed", "4bed", "parklands"],
+  "nyayo-view-suites": ["studio", "1bed", "nairobi-west"],
+  "balozi-suites": ["studio", "1bed", "south-b"],
+  "the-reveal": ["studio", "1bed", "kilimani"],
+};
+
+export const projects: Project[] = portfolioProjects.map((p) => ({
+  code: p.code,
+  name: p.name,
+  type: p.unitSummary,
+  location: p.location,
+  status: p.status,
+  tags: TAGS[p.slug] ?? [],
+  slug: p.slug,
+}));
 
 export interface Apartment {
   id: string;
@@ -26,15 +48,6 @@ export interface Apartment {
   description: string;
   tags: string[];
 }
-
-export const projects: Project[] = [
-  { code: "01", name: "Park Road Residency", type: "1 Bedroom · Furnished", location: "Park Road, Nairobi", status: "Selling Now", tags: ["1bed", "furnished", "park-road"] },
-  { code: "02", name: "Westway Apartments",  type: "Studio · 1BR · 2BR",    location: "Westlands, Nairobi", status: "Ongoing 2026", tags: ["studio", "1bed", "2bed", "westlands"] },
-  { code: "03", name: "Nyayo View Suites",   type: "Studio · 1 Bedroom",    location: "Nairobi West",       status: "Sold Out",   tags: ["studio", "1bed", "nairobi-west"] },
-  { code: "04", name: "Hillside Gardens",    type: "3 & 4 Bedroom",         location: "Parklands",          status: "Completed",  tags: ["3bed", "4bed", "parklands"] },
-  { code: "05", name: "Balozi Suites",       type: "Studio · 1 Bedroom",    location: "South B",            status: "Sold Out",   tags: ["studio", "1bed", "south-b"] },
-  { code: "06", name: "The Reveal",          type: "Studio · 1 Bedroom",    location: "Kilimani",           status: "Sold Out",   tags: ["studio", "1bed", "kilimani"] },
-];
 
 export const apartments: Apartment[] = [
   {

@@ -9,6 +9,48 @@ interface Filters {
   sqft: string;
 }
 
+const FIELDS: {
+  key: keyof Filters;
+  label: string;
+  placeholder: string;
+  options: { value: string; label: string }[];
+}[] = [
+  {
+    key: "type",
+    label: "Property Type",
+    placeholder: "Any type",
+    options: [
+      { value: "studio", label: "Studio" },
+      { value: "1bed", label: "1 Bedroom" },
+      { value: "2bed", label: "2 Bedroom" },
+      { value: "3bed", label: "3 Bedroom" },
+      { value: "4bed", label: "4 Bedroom" },
+    ],
+  },
+  {
+    key: "budget",
+    label: "Budget (KSh)",
+    placeholder: "Any budget",
+    options: [
+      { value: "5-10", label: "5M – 10M" },
+      { value: "10-15", label: "10M – 15M" },
+      { value: "15-20", label: "15M – 20M" },
+      { value: "20+", label: "20M+" },
+    ],
+  },
+  {
+    key: "sqft",
+    label: "Floor Area",
+    placeholder: "Any size",
+    options: [
+      { value: "500-1000", label: "500 – 1,000 sqft" },
+      { value: "1000-1500", label: "1,000 – 1,500 sqft" },
+      { value: "1500-2000", label: "1,500 – 2,000 sqft" },
+      { value: "2000+", label: "2,000+ sqft" },
+    ],
+  },
+];
+
 export default function PropertySearch() {
   const [filters, setFilters] = useState<Filters>({ type: "", budget: "", sqft: "" });
 
@@ -18,71 +60,47 @@ export default function PropertySearch() {
     if (filters.budget) params.set("budget", filters.budget);
     if (filters.sqft) params.set("sqft", filters.sqft);
     const qs = params.toString();
-    const hash = qs ? `#properties?${qs}` : "#properties";
-    window.location.hash = hash;
-    const el = document.querySelector("#properties");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    window.location.hash = qs ? `#properties?${qs}` : "#properties";
+    document.querySelector("#properties")?.scrollIntoView({ behavior: "smooth" });
   }, [filters]);
-
-  const glassClass = "bg-white/10 dark:bg-white/10 backdrop-blur-2xl border border-white/20 shadow-xl";
 
   return (
     <div
-      className={`w-full max-w-4xl ${glassClass} rounded-2xl p-4 sm:p-6`}
+      className="mx-auto w-full max-w-4xl rounded-2xl border border-white/15 bg-white/[0.07] p-2 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.6)] backdrop-blur-2xl"
       role="search"
       aria-label="Property search"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <select
-          value={filters.type}
-          onChange={(e) => setFilters({ ...filters, type: e.target.value })}
-          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-amber-500 appearance-none"
-          aria-label="Property type"
-        >
-          <option value="" className="text-gray-800">Property Type</option>
-          <option value="studio" className="text-gray-800">Studio</option>
-          <option value="1bed" className="text-gray-800">1 Bedroom</option>
-          <option value="2bed" className="text-gray-800">2 Bedroom</option>
-          <option value="3bed" className="text-gray-800">3 Bedroom</option>
-          <option value="4bed" className="text-gray-800">4 Bedroom</option>
-        </select>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-[1fr_1fr_1fr_auto]">
+        {FIELDS.map((field) => (
+          <label key={field.key} className="group flex flex-col gap-1 rounded-xl px-4 py-2.5 transition-colors hover:bg-white/5">
+            <span className="text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-white/50">
+              {field.label}
+            </span>
+            <select
+              value={filters[field.key]}
+              onChange={(e) => setFilters({ ...filters, [field.key]: e.target.value })}
+              className="w-full cursor-pointer appearance-none bg-transparent text-sm text-white focus:outline-none"
+              aria-label={field.label}
+            >
+              <option value="" className="bg-neutral-900 text-white">{field.placeholder}</option>
+              {field.options.map((o) => (
+                <option key={o.value} value={o.value} className="bg-neutral-900 text-white">
+                  {o.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
 
-        <select
-          value={filters.budget}
-          onChange={(e) => setFilters({ ...filters, budget: e.target.value })}
-          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-amber-500 appearance-none"
-          aria-label="Budget range"
+        <button
+          onClick={handleSearch}
+          className="group m-1 flex items-center justify-center gap-2 rounded-xl bg-amber-500 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-black transition-all duration-300 hover:bg-amber-400 sm:aspect-square sm:px-0"
+          aria-label="Search properties"
         >
-          <option value="" className="text-gray-800">Budget (KSh)</option>
-          <option value="5-10" className="text-gray-800">5M - 10M</option>
-          <option value="10-15" className="text-gray-800">10M - 15M</option>
-          <option value="15-20" className="text-gray-800">15M - 20M</option>
-          <option value="20+" className="text-gray-800">20M+</option>
-        </select>
-
-        <select
-          value={filters.sqft}
-          onChange={(e) => setFilters({ ...filters, sqft: e.target.value })}
-          className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-amber-500 appearance-none"
-          aria-label="Square footage"
-        >
-          <option value="" className="text-gray-800">Square Feet</option>
-          <option value="500-1000" className="text-gray-800">500 - 1000 sqft</option>
-          <option value="1000-1500" className="text-gray-800">1000 - 1500 sqft</option>
-          <option value="1500-2000" className="text-gray-800">1500 - 2000 sqft</option>
-          <option value="2000+" className="text-gray-800">2000+ sqft</option>
-        </select>
+          <Search className="h-4 w-4" />
+          <span className="sm:hidden">Search</span>
+        </button>
       </div>
-
-      <button
-        onClick={handleSearch}
-        className="w-full mt-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center space-x-2 shadow-lg shadow-amber-500/25"
-      >
-        <Search className="w-5 h-5" />
-        <span>Search Properties</span>
-      </button>
     </div>
   );
 }

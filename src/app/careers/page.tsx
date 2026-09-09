@@ -46,7 +46,7 @@ const perks = [
 
 export default function CareersPage() {
   return (
-    <main className="bg-app-bg min-h-screen pt-24">
+    <div className="min-h-screen pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
           &larr; Back to Home
@@ -66,7 +66,7 @@ export default function CareersPage() {
           {perks.map((p) => {
             const Icon = p.icon;
             return (
-              <div key={p.title} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
+              <div key={p.title} className={"u-card p-6 text-center"}>
                 <Icon className="w-8 h-8 text-amber-400 mx-auto mb-3" />
                 <h3 className="text-primary font-semibold mb-1">{p.title}</h3>
                 <p className="text-secondary text-xs">{p.desc}</p>
@@ -79,7 +79,7 @@ export default function CareersPage() {
         <h2 className="font-serif text-2xl font-light text-primary mb-8">Open Positions</h2>
         <div className="space-y-6 mb-20">
           {jobOpenings.map((job) => (
-            <div key={job.title} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm"}>
+            <div key={job.title} className={"u-card p-6"}>
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <div>
                   <h3 className="font-serif text-xl font-medium text-primary">{job.title}</h3>
@@ -117,7 +117,7 @@ export default function CareersPage() {
               <div className="mt-6">
                 <Link
                   href={`mailto:careers@sapiohome.com?subject=Application for ${encodeURIComponent(job.title)}`}
-                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-6 py-2.5 rounded-xl transition-all text-sm"
+                  className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-semibold px-6 py-2.5 rounded-xl transition-all text-sm"
                 >
                   <Send className="w-4 h-4" /> Apply Now
                 </Link>
@@ -127,7 +127,7 @@ export default function CareersPage() {
         </div>
 
         {/* Spontaneous Application */}
-        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center shadow-sm"}>
+        <div className={"u-card p-8 text-center"}>
           <h2 className="font-serif text-2xl font-light text-primary mb-4">Don&apos;t See the Right Role?</h2>
           <p className="text-secondary mb-6 max-w-xl mx-auto">
             We&apos;re always on the lookout for talented individuals. Send us your CV and
@@ -135,12 +135,12 @@ export default function CareersPage() {
           </p>
           <Link
             href="mailto:careers@sapiohome.com"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-3 rounded-xl transition-all"
+            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-semibold px-8 py-3 rounded-xl transition-all"
           >
             <Send className="w-5 h-5" /> Send Your CV
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

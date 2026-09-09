@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
         pathname: '/storage/v1/object/public/**',
       },
     ],
+    // Safe: only serves SVGs from our whitelisted Supabase storage bucket
     dangerouslyAllowSVG: true,
   },
   // Silence the lockfile warning

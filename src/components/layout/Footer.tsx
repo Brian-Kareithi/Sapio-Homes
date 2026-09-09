@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Home, ArrowUpRight } from "lucide-react";
+import { Facebook, Youtube, Instagram, Linkedin, Mail, Phone, MapPin, Home, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { subscribeNewsletter } from "@/lib/api";
 
@@ -26,8 +26,6 @@ export default function Footer() {
   return (
     <footer className="bg-app-bg border-t border-app-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="h-px w-full bg-gray-200 dark:bg-gray-700" />
-
         <div className="py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
             {/* Brand */}
@@ -39,23 +37,27 @@ export default function Footer() {
                 <span className="font-serif text-xl font-light text-primary">Sapio Homes</span>
               </Link>
               <p className="text-secondary text-sm leading-relaxed max-w-sm mb-6">
-                Where intelligent design meets affordable luxury. Experience thoughtfully crafted
-                spaces governed by quality, innovation, and timeless elegance.
+                Own the future of city living. Sapio Homes designs, builds, and manages
+                affordable luxury apartments across Nairobi — governed by quality, innovation,
+                and timeless elegance.
               </p>
               <div className="flex gap-3">
                 {[
-                  { icon: Facebook, href: "#" },
-                  { icon: Twitter, href: "#" },
-                  { icon: Instagram, href: "#" },
-                  { icon: Linkedin, href: "#" },
-                ].map(({ icon: Icon, href }, i) => (
-                  <Link
-                    key={i}
+                  { icon: Facebook, href: "https://www.facebook.com/share/1YtGkeuvnE/?mibextid=wwXIfr", label: "Facebook" },
+                  { icon: Instagram, href: "https://www.instagram.com/sapiohomes/", label: "Instagram" },
+                  { icon: Youtube, href: "https://www.youtube.com/embed/zBW2wQJRmXI", label: "YouTube" },
+                  { icon: Linkedin, href: "#", label: "LinkedIn" },
+                ].map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
                     href={href}
-                    className="w-9 h-9 rounded-full bg-surface hover:bg-amber-500 flex items-center justify-center text-secondary hover:text-white transition-all duration-300"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="w-9 h-9 rounded-full bg-surface hover:bg-amber-500 flex items-center justify-center text-secondary hover:text-black transition-all duration-300"
                   >
                     <Icon className="w-4 h-4" />
-                  </Link>
+                  </a>
                 ))}
               </div>
             </div>
@@ -67,11 +69,12 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 {[
-                  { name: "Home", href: "#home" },
-                  { name: "About Us", href: "#about" },
-                  { name: "Properties", href: "#properties" },
-                  { name: "Services", href: "#services" },
-                  { name: "Contact", href: "#contact" },
+                  { name: "Home", href: "/" },
+                  { name: "About", href: "/company-profile" },
+                  { name: "Projects", href: "/projects" },
+                  { name: "Services", href: "/#services" },
+                  { name: "FAQ", href: "/faq" },
+                  { name: "Contact", href: "/#contact" },
                 ].map((link) => (
                   <li key={link.name}>
                     <Link
@@ -93,11 +96,11 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 {[
-                  { name: "Company Profile", href: "/company-profile" },
+                  { name: "Park Road Residency", href: "/projects/park-road-residency" },
+                  { name: "Westway Apartments", href: "/projects/westway-apartments" },
                   { name: "Property Management", href: "/property-management" },
                   { name: "Our Team", href: "/team" },
                   { name: "Careers", href: "/careers" },
-                  { name: "All Properties", href: "/properties" },
                 ].map((link) => (
                   <li key={link.name}>
                     <Link
@@ -121,7 +124,7 @@ export default function Footer() {
                 <li className="flex items-start gap-3 text-secondary">
                   <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-400" />
                   <span className="text-sm leading-relaxed">
-                    {process.env.NEXT_PUBLIC_COMPANY_ADDRESS || "HH Towers, Nairobi, Kenya"}
+                    {process.env.NEXT_PUBLIC_COMPANY_ADDRESS || "HH Towers, Moi Avenue, Nairobi, Kenya"}
                   </span>
                 </li>
                 <li className="flex items-center gap-3 text-secondary">
@@ -141,7 +144,7 @@ export default function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 mt-12">
+          <div className="bg-app-secondary border border-app-border rounded-2xl p-6 sm:p-8 mt-12">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
               <div className="flex-1">
                 <h4 className="font-serif text-lg font-light text-primary mb-1">Stay Updated</h4>
@@ -161,13 +164,13 @@ export default function Footer() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Your email address"
-                      className="flex-1 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-l-xl px-4 py-2.5 text-primary text-sm placeholder:text-muted focus:outline-none focus:border-amber-400 transition-colors"
+                      className="flex-1 bg-app-bg border border-app-border rounded-l-xl px-4 py-2.5 text-primary text-sm placeholder:text-muted focus:outline-none focus:border-amber-400 transition-colors"
                       onKeyDown={(e) => e.key === "Enter" && handleSubscribe()}
                     />
                     <button
                       onClick={handleSubscribe}
                       disabled={subStatus === "submitting" || !email}
-                      className="bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed px-5 py-2.5 rounded-r-xl text-white text-sm font-medium transition-all"
+                      className="bg-amber-500 hover:bg-amber-400 disabled:opacity-40 disabled:cursor-not-allowed px-5 py-2.5 rounded-r-xl text-black text-sm font-semibold transition-all"
                     >
                       {subStatus === "submitting" ? "Sending..." : "Subscribe"}
                     </button>
@@ -187,11 +190,11 @@ export default function Footer() {
             Copyright &copy; {new Date().getFullYear()} Sapio Homes. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-xs text-muted">
-            <Link href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</Link>
+            <Link href="/privacy" className="hover:text-amber-500 transition-colors">Privacy Policy</Link>
             <span className="w-1 h-1 rounded-full bg-app-border" />
-            <Link href="#" className="hover:text-amber-500 transition-colors">Terms of Service</Link>
+            <Link href="/terms" className="hover:text-amber-500 transition-colors">Terms of Service</Link>
             <span className="w-1 h-1 rounded-full bg-app-border" />
-            <Link href="#" className="hover:text-amber-500 transition-colors">Sitemap</Link>
+            <a href="/sitemap.xml" className="hover:text-amber-500 transition-colors">Sitemap</a>
           </div>
         </div>
       </div>

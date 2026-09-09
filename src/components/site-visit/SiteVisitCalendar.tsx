@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { submitSiteVisit } from "@/lib/api";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const TIMES = ["10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM", "4:00 PM"];
@@ -71,19 +72,16 @@ export default function SiteVisitCalendar() {
   };
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center gap-3 mb-6">
-          <span className="h-px w-8 bg-amber-400" />
-          <span className="text-xs uppercase tracking-[0.25em] text-amber-500">SCHEDULE A VISIT</span>
-        </div>
-
-        <h2 className="font-serif text-4xl sm:text-5xl font-light text-primary leading-tight text-center mb-12">
-          Book Your Private Showing
-        </h2>
+    <section className="bg-app-bg py-24 sm:py-32">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <SectionHeading
+          eyebrow="Schedule a Visit"
+          title="Book your private showing"
+          className="mb-14"
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <div className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8">
+          <div className="u-card p-8">
             <h3 className="font-serif text-2xl font-light text-primary mb-2">Sapio Homes</h3>
             <p className="text-xs uppercase tracking-[0.25em] text-amber-500 mb-4">Site Visit &amp; Apartment Tour</p>
             <p className="text-muted text-sm mb-4">1 hr</p>
@@ -95,7 +93,7 @@ export default function SiteVisitCalendar() {
             </p>
           </div>
 
-          <div className="bg-white dark:bg-[#0f1221] border border-gray-100 dark:border-gray-800/60 shadow-sm rounded-2xl p-8">
+          <div className="u-card p-8">
             <p className="text-xs uppercase tracking-[0.25em] text-amber-500 mb-6">Site Visit &amp; Apartment Tour</p>
 
             {status === "success" ? (
@@ -156,7 +154,7 @@ export default function SiteVisitCalendar() {
                         disabled={isPast}
                         className={`py-2 text-center rounded-lg transition-all text-sm ${
                           selectedDate === date
-                            ? "bg-amber-500 text-white"
+                            ? "bg-amber-500 text-black"
                             : isPast
                               ? "text-muted cursor-not-allowed opacity-40"
                               : "text-secondary hover:bg-amber-50 dark:hover:bg-amber-500/10 hover:text-amber-600"
@@ -177,8 +175,8 @@ export default function SiteVisitCalendar() {
                         onClick={() => setSelectedTime(time)}
                         className={`py-2 text-sm rounded-lg transition-all ${
                           selectedTime === time
-                            ? "bg-amber-500 text-white"
-                            : "bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-secondary hover:border-amber-400 hover:text-amber-600 transition-all"
+                            ? "bg-amber-500 text-black"
+                            : "bg-app-bg border border-app-border text-secondary hover:border-amber-400 hover:text-amber-600 transition-all"
                         }`}
                       >
                         {time}
@@ -190,7 +188,7 @@ export default function SiteVisitCalendar() {
                 <button
                   onClick={handleSchedule}
                   disabled={!selectedDate || !selectedTime || status === "submitting"}
-                  className="w-full bg-amber-500 hover:bg-amber-600 disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-medium py-3 rounded-xl transition-all"
+                  className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed text-black font-medium py-3 rounded-xl transition-all"
                 >
                   {status === "submitting" ? "Scheduling..." : "Schedule Visit"}
                 </button>
@@ -200,7 +198,7 @@ export default function SiteVisitCalendar() {
                 )}
 
                 <p className="text-muted text-xs text-center mt-4">
-                  Cookie settings &bull; Privacy Policy
+                  By scheduling a visit you agree to our <a href="/privacy" className="underline hover:text-amber-500 transition-colors">Privacy Policy</a>.
                 </p>
               </>
             )}

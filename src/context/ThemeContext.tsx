@@ -10,15 +10,15 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType>({
-  theme: "dark",
+  theme: "light",
   toggleTheme: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const stored = (localStorage.getItem("theme") as Theme) ?? "dark";
+    const stored = (localStorage.getItem("theme") as Theme) ?? "light";
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setTheme(stored);
   }, []);

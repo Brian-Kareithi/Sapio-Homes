@@ -83,11 +83,11 @@ export default function ProjectList() {
         </div>
       ) : (
         filtered.map((p) => {
-          const isSelling = p.status === "Selling Now" || p.status.startsWith("Ongoing");
+          const isSelling = p.status === "Selling Now" || p.status.startsWith("Ongoing") || p.status.startsWith("Off-Plan");
           return (
             <a
               key={p.code}
-              href="#contact"
+              href={`/projects/${p.slug}`}
               style={{
                 display: "flex",
                 alignItems: "center",

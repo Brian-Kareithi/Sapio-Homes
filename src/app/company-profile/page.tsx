@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function CompanyProfilePage() {
   return (
-    <main className="bg-app-bg min-h-screen pt-24">
+    <div className="min-h-screen pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
           &larr; Back to Home
@@ -68,7 +68,7 @@ export default function CompanyProfilePage() {
             { value: "6+", label: "Active Projects" },
             { value: "12+", label: "Years Experience" },
           ].map((s) => (
-            <div key={s.label} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
+            <div key={s.label} className={"u-card p-6 text-center"}>
               <div className="text-3xl font-bold text-amber-400 mb-2">{s.value}</div>
               <div className="text-sm text-secondary">{s.label}</div>
             </div>
@@ -112,7 +112,7 @@ export default function CompanyProfilePage() {
           ].map((v) => {
             const Icon = v.icon;
             return (
-              <div key={v.title} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm">
+              <div key={v.title} className="u-card p-6">
                 <div className="w-12 h-12 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center mb-4 border border-amber-500/20">
                   <Icon className="w-6 h-6 text-amber-400" />
                 </div>
@@ -124,7 +124,7 @@ export default function CompanyProfilePage() {
         </div>
 
         {/* Google Business Info */}
-        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 mb-20 shadow-sm"}>
+        <div className={"u-card p-8 mb-20"}>
           <h2 className="font-serif text-2xl font-light text-primary mb-6">Find Us on Google</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
@@ -181,12 +181,12 @@ export default function CompanyProfilePage() {
           </p>
           <Link
             href="/#contact"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-3 rounded-xl transition-all"
+            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-semibold px-8 py-3 rounded-xl transition-all"
           >
             Get in Touch
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

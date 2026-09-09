@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/api/",
     },
-    sitemap: "https://sapiohomes.com/sitemap.xml",
+    sitemap: "https://sapiohome.com/sitemap.xml",
   };
 }

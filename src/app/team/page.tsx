@@ -77,7 +77,7 @@ const leadership = [
 
 export default function TeamPage() {
   return (
-    <main className="bg-app-bg min-h-screen pt-24">
+    <div className="min-h-screen pt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
           &larr; Back to Home
@@ -96,7 +96,7 @@ export default function TeamPage() {
         <h2 className="font-serif text-2xl font-light text-primary mb-8">Leadership</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {leadership.map((person) => (
-            <div key={person.name} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-center shadow-sm"}>
+            <div key={person.name} className={"u-card p-6 text-center"}>
               <div className="w-20 h-20 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-amber-500/30">
                 <span className="text-2xl font-bold text-amber-400">
                   {person.name.split(" ").map((n) => n[0]).join("")}
@@ -115,7 +115,7 @@ export default function TeamPage() {
           {departments.map((dept) => {
             const Icon = dept.icon;
             return (
-              <div key={dept.name} className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-sm"}>
+              <div key={dept.name} className={"u-card p-6"}>
                 <div className="flex items-center gap-4 mb-3">
                   <div className="w-10 h-10 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
                     <Icon className="w-5 h-5 text-amber-400" />
@@ -134,7 +134,7 @@ export default function TeamPage() {
         </div>
 
         {/* Join the team */}
-        <div className={"bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center shadow-sm"}>
+        <div className={"u-card p-8 text-center"}>
           <h2 className="font-serif text-2xl font-light text-primary mb-4">Join Our Team</h2>
           <p className="text-secondary mb-6 max-w-xl mx-auto">
             We&apos;re always looking for talented individuals who share our passion for real estate
@@ -142,12 +142,12 @@ export default function TeamPage() {
           </p>
           <Link
             href="/careers"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-600 text-white font-semibold px-8 py-3 rounded-xl transition-all"
+            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-semibold px-8 py-3 rounded-xl transition-all"
           >
             View Careers
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

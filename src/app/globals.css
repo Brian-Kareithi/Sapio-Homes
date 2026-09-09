@@ -1,7 +1,11 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ============================================================
+   Design tokens  →  Tailwind theme
+   ============================================================ */
 @theme {
+  /* Surface + text scale (used site-wide as bg-app-bg, text-primary, etc.) */
   --color-app-bg: var(--bg);
   --color-app-secondary: var(--bg-secondary);
   --color-app-surface: var(--surface);
@@ -10,85 +14,222 @@
   --color-app-secondary-text: var(--text-secondary);
   --color-app-muted: var(--text-muted);
   --color-app-border: var(--border);
+
+  /* Short aliases — these were referenced everywhere but never registered */
+  --color-primary: var(--text);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+
+  /* Refined gold — re-skins every `amber-*` utility already in the codebase */
+  --color-amber-50: var(--gold-50);
+  --color-amber-100: var(--gold-100);
+  --color-amber-200: var(--gold-200);
+  --color-amber-300: var(--gold-300);
+  --color-amber-400: var(--gold-400);
+  --color-amber-500: var(--gold-500);
+  --color-amber-600: var(--gold-600);
+  --color-amber-700: var(--gold-700);
+
+  --font-serif: var(--font-serif), "Cormorant Garamond", Georgia, serif;
+
+  --shadow-premium: 0 1px 2px rgba(17, 17, 17, 0.04), 0 12px 32px -12px rgba(17, 17, 17, 0.12);
+  --shadow-premium-lg: 0 2px 8px rgba(17, 17, 17, 0.06), 0 32px 64px -24px rgba(17, 17, 17, 0.22);
 }
 
+/* ============================================================
+   Light theme (warm architectural ivory)
+   ============================================================ */
 :root {
-  --bg: #ffffff;
-  --bg-secondary: #f3f4f6;
-  --surface: rgba(0, 0, 0, 0.03);
-  --surface-hover: rgba(0, 0, 0, 0.06);
-  --text: #111827;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
-  --border: #e5e7eb;
+  --bg: #fdfcfa;
+  --bg-secondary: #f4f1ea;
+  --surface: #ffffff;
+  --surface-hover: #f6f3ec;
+  --text: #16150f;
+  --text-secondary: #565248;
+  --text-muted: #8f897c;
+  --border: #e8e2d5;
 
-  --props-bg: #f5f3ee;
-  --props-text: #1a1a2e;
-  --props-text-secondary: rgba(26, 26, 46, 0.65);
-  --props-text-muted: rgba(26, 26, 46, 0.4);
-  --props-border: rgba(26, 26, 46, 0.1);
-  --props-surface: rgba(26, 26, 46, 0.03);
-  --props-surface-hover: rgba(26, 26, 46, 0.06);
-  --props-accent: #d4a847;
+  --gold-50: #faf6ec;
+  --gold-100: #f2e9d2;
+  --gold-200: #e6d3a7;
+  --gold-300: #d6b877;
+  --gold-400: #c6a15b;
+  --gold-500: #b08641;
+  --gold-600: #8f6a30;
+  --gold-700: #6f5124;
+
+  --props-bg: #f6f3ec;
+  --props-text: #16150f;
+  --props-text-secondary: rgba(22, 21, 15, 0.66);
+  --props-text-muted: rgba(22, 21, 15, 0.42);
+  --props-border: rgba(22, 21, 15, 0.12);
+  --props-surface: rgba(22, 21, 15, 0.03);
+  --props-surface-hover: rgba(22, 21, 15, 0.06);
+  --props-accent: #b08641;
 }
 
+/* ============================================================
+   Dark theme (rich, warm near-black)
+   ============================================================ */
 .dark {
-  --bg: #000000;
-  --bg-secondary: #0b0f17;
-  --surface: rgba(255, 255, 255, 0.05);
-  --surface-hover: rgba(255, 255, 255, 0.1);
-  --text: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --text-muted: rgba(255, 255, 255, 0.4);
-  --border: rgba(255, 255, 255, 0.1);
+  --bg: #0a0b0c;
+  --bg-secondary: #101113;
+  --surface: #131417;
+  --surface-hover: #1b1c20;
+  --text: #f4f2ec;
+  --text-secondary: rgba(244, 242, 236, 0.62);
+  --text-muted: rgba(244, 242, 236, 0.4);
+  --border: rgba(244, 242, 236, 0.1);
 
-  --props-bg: #0b0f17;
-  --props-text: #ffffff;
-  --props-text-secondary: rgba(255, 255, 255, 0.6);
-  --props-text-muted: rgba(255, 255, 255, 0.4);
-  --props-border: rgba(255, 255, 255, 0.1);
-  --props-surface: rgba(255, 255, 255, 0.03);
-  --props-surface-hover: rgba(255, 255, 255, 0.06);
-  --props-accent: #d4a847;
+  --gold-50: rgba(198, 161, 91, 0.08);
+  --gold-100: rgba(198, 161, 91, 0.14);
+  --gold-200: rgba(198, 161, 91, 0.28);
+  --gold-300: #b8975a;
+  --gold-400: #cdae72;
+  --gold-500: #d9bd83;
+  --gold-600: #e4cc9c;
+  --gold-700: #efdcb8;
+
+  --props-bg: #0d0e10;
+  --props-text: #f4f2ec;
+  --props-text-secondary: rgba(244, 242, 236, 0.62);
+  --props-text-muted: rgba(244, 242, 236, 0.42);
+  --props-border: rgba(244, 242, 236, 0.1);
+  --props-surface: rgba(244, 242, 236, 0.035);
+  --props-surface-hover: rgba(244, 242, 236, 0.07);
+  --props-accent: #cdae72;
 }
 
+/* ============================================================
+   Base
+   ============================================================ */
 @layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   body {
     background-color: var(--bg);
     color: var(--text);
-    transition: background-color 0.2s, color 0.2s;
+    font-feature-settings: "kern", "liga", "calt";
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  @font-face {
-    font-family: 'Geist Sans';
-    src: url('/fonts/Geist-Variable.woff2') format('woff2');
+  h1, h2, h3, h4 {
+    letter-spacing: -0.02em;
   }
 
-  @font-face {
-    font-family: 'Geist Mono';
-    src: url('/fonts/GeistMono-Variable.woff2') format('woff2');
+  ::selection {
+    background: var(--gold-400);
+    color: #0a0b0c;
   }
+
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 9999px;
+    border: 2px solid var(--bg);
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+  :focus-visible {
+    outline: 2px solid var(--gold-400);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+
 }
 
+/* ============================================================
+   Utilities
+   ============================================================ */
 @layer utilities {
   .font-display {
     font-family: var(--font-geist-sans), system-ui, sans-serif;
   }
 
+  /* Small caps eyebrow label used above every section title */
+  .u-eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-500);
+  }
+
+  /* Premium card: subtle surface, hairline border, quiet lift on hover */
+  .u-card {
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-premium);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.4s ease;
+  }
+  .u-card-interactive:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-premium-lg);
+    border-color: color-mix(in srgb, var(--gold-400) 45%, var(--border));
+  }
+
+  .u-hairline {
+    height: 1px;
+    width: 2.5rem;
+    background: linear-gradient(to right, var(--gold-400), transparent);
+  }
+
+  .u-gold-text {
+    color: var(--gold-500);
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+
   .animate-reveal {
-    animation: reveal 0.5s ease-out;
+    animation: reveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-kenburns {
+    animation: kenburns 16s ease-in-out infinite alternate;
+  }
+
+  .animate-float-slow {
+    animation: floatSlow 3s ease-in-out infinite;
   }
 
   @keyframes reveal {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
+  @keyframes kenburns {
+    from { transform: scale(1) translate(0, 0); }
+    to { transform: scale(1.12) translate(-1.5%, -1.5%); }
+  }
 
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(8px); opacity: 1; }
+  }
 }

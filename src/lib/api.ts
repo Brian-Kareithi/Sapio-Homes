@@ -11,28 +11,43 @@ export interface SiteVisitData {
   email?: string;
 }
 
+/**
+ * Submits the contact form to the backend API.
+ * TODO: Implement /api/contact route with email delivery or CRM integration.
+ */
 export async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; message: string }> {
-  try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) throw new Error("Failed to submit");
-    return await res.json();
-  } catch {
-    // Fallback for demo: simulate success
-    await new Promise((r) => setTimeout(r, 800));
-    return { success: true, message: "Thank you for contacting us. We'll get back to you soon!" };
-  }
+  const res = await fetch("/api/contact", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Failed to submit contact form");
+  return res.json();
 }
 
+/**
+ * Submits a site visit booking request.
+ * TODO: Implement /api/site-visit route with calendar integration.
+ */
 export async function submitSiteVisit(data: SiteVisitData): Promise<{ success: boolean; message: string }> {
-  await new Promise((r) => setTimeout(r, 600));
-  return { success: true, message: `Site visit scheduled for ${data.date} at ${data.time}. We'll confirm shortly!` };
+  const res = await fetch("/api/site-visit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Failed to schedule site visit");
+  return res.json();
 }
 
+/**
+ * Subscribes a visitor to the newsletter.
+ * TODO: Implement /api/newsletter route with email service integration.
+ */
 export async function subscribeNewsletter(): Promise<{ success: boolean; message: string }> {
-  await new Promise((r) => setTimeout(r, 400));
-  return { success: true, message: "Subscribed successfully! Check your inbox for updates." };
+  const res = await fetch("/api/newsletter", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!res.ok) throw new Error("Failed to subscribe to newsletter");
+  return res.json();
 }
