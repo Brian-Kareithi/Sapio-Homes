@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Home, Building, BadgePercent, TrendingUp, Search, Filter } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
   title: "Properties | Sapio Homes",
@@ -10,24 +11,24 @@ export const metadata: Metadata = {
 const propertyTypes = [
   {
     title: "Properties on Show",
-    count: 8,
+    count: 4,
     icon: Building,
     desc: "Featured developments currently available for viewing. Schedule a site visit to experience our latest projects firsthand.",
     link: "/#properties",
   },
   {
-    title: "Rent Property",
-    count: 373,
+    title: "Under Management",
+    count: 450,
     icon: Home,
-    desc: "Quality rental apartments in Nairobi's most desirable neighborhoods. Studios, 1-bedroom, and 2-bedroom units available for immediate occupancy.",
+    desc: "Units managed by our in-house team across Nairobi — from tenant sourcing and rent collection to maintenance and monthly reporting.",
     link: "/#properties",
   },
   {
     title: "Buy Property",
-    count: 363,
+    count: 6,
     icon: TrendingUp,
-    desc: "Prime properties for sale across Nairobi. From affordable starter homes to luxury residences with premium finishes and amenities.",
-    link: "/#properties",
+    desc: "Developments available across the portfolio — from affordable starter homes to luxury residences with premium finishes.",
+    link: "/projects",
   },
   {
     title: "Sell / Let Your Home",
@@ -41,27 +42,25 @@ const propertyTypes = [
 export default function PropertiesPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm transition-colors">
           &larr; Back to Home
         </Link>
-        <div className="text-center mb-16">
-          <h1 className="font-serif text-4xl sm:text-5xl font-light text-primary mb-4">
-            Properties
-          </h1>
-          <p className="text-secondary max-w-3xl mx-auto text-lg">
-            Explore our comprehensive portfolio of properties across Nairobi. Whether you&apos;re
-            looking to buy, rent, or sell, Sapio Homes has you covered.
-          </p>
-        </div>
+        <SectionHeading
+          align="left"
+          eyebrow="Listings"
+          title="Properties"
+          description="Explore our comprehensive portfolio of properties across Nairobi. Whether you're looking to buy, rent, or sell, Sapio Homes has you covered."
+          className="mt-8"
+        />
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
           {[
-            { label: "For Sale", value: "363" },
-            { label: "For Rent", value: "373" },
-            { label: "On Show", value: "8" },
-            { label: "Sold 2024", value: "120+" },
+            { label: "Units Delivered", value: "1,300+" },
+            { label: "Active Developments", value: "6+" },
+            { label: "Client Satisfaction", value: "98%" },
+            { label: "Sold in 2024", value: "120+" },
           ].map((s) => (
             <div key={s.label} className={"u-card p-6 text-center"}>
               <div className="text-3xl font-bold text-amber-400 mb-1">{s.value}</div>
@@ -110,11 +109,11 @@ export default function PropertiesPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {[
-              { type: "Studio", count: 120 },
-              { type: "1 Bedroom", count: 245 },
-              { type: "2 Bedroom", count: 198 },
-              { type: "3 Bedroom", count: 89 },
-              { type: "4 Bedroom+", count: 74 },
+              { type: "Studio", count: 2 },
+              { type: "1 Bedroom", count: 3 },
+              { type: "2 Bedroom", count: 2 },
+              { type: "3 Bedroom", count: 1 },
+              { type: "4 Bedroom+", count: 1 },
             ].map((t) => (
               <Link
                 key={t.type}
@@ -122,7 +121,7 @@ export default function PropertiesPage() {
                 className={"u-card p-4 text-center hover:border-amber-500/50 transition-all"}
               >
                 <div className="text-lg font-bold text-primary">{t.type}</div>
-                <div className="text-sm text-muted">{t.count} listings</div>
+                <div className="text-sm text-muted">{t.count} {t.count === 1 ? "development" : "developments"}</div>
               </Link>
             ))}
           </div>

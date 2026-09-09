@@ -9,11 +9,11 @@ export default function FloorPlan({ apt }: { apt: Apartment }) {
   const [lo, hi] = apt.floorRange;
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 2, padding: "16px 0" }}>
-      <div style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--props-text-muted)", marginBottom: 8 }}>
+    <div className="flex flex-col gap-0.5 py-4">
+      <div className="mb-3 text-[0.625rem] uppercase tracking-[0.2em] text-muted">
         Floor selector &middot; 25 Levels
       </div>
-      <div style={{ maxHeight: 240, overflowY: "auto", paddingRight: 6 }}>
+      <div className="max-h-60 overflow-y-auto pr-1.5">
         {Array.from({ length: floors })
           .map((_, i) => floors - 1 - i)
           .map((i) => {
@@ -24,29 +24,19 @@ export default function FloorPlan({ apt }: { apt: Apartment }) {
                 key={i}
                 onMouseEnter={() => setHovered(i)}
                 onMouseLeave={() => setHovered(null)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  cursor: inRange ? "pointer" : "default",
-                  marginBottom: 3,
-                }}
+                className="mb-0.5 flex cursor-default items-center gap-2"
               >
                 <div
-                  style={{
-                    height: 8,
-                    flex: 1,
-                    borderRadius: 2,
-                    background: inRange
+                  className={`h-2 flex-1 rounded-sm transition-colors ${
+                    inRange
                       ? isHov
-                        ? "var(--props-accent)"
-                        : "rgba(212,168,71,0.55)"
-                      : "var(--props-border)",
-                    transition: "background 0.2s",
-                  }}
+                        ? "bg-amber-500"
+                        : "bg-amber-500/55"
+                      : "bg-app-border"
+                  }`}
                 />
                 {inRange && isHov && (
-                  <span style={{ fontSize: 9, color: "var(--props-accent)", letterSpacing: "0.15em", textTransform: "uppercase", whiteSpace: "nowrap" }}>
+                  <span className="whitespace-nowrap text-[0.5625rem] uppercase tracking-[0.15em] text-amber-500">
                     Floor {i + 1}
                   </span>
                 )}

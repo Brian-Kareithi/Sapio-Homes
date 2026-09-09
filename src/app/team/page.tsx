@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { HardDrive, Megaphone, Settings, UserCheck, GraduationCap, PiggyBank, Monitor } from "lucide-react";
+import {
+  HardDrive,
+  Megaphone,
+  Settings,
+  UserCheck,
+  GraduationCap,
+  PiggyBank,
+  Monitor,
+} from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 export const metadata: Metadata = {
   title: "Our Team | Sapio Homes",
-  description: "Meet the Sapio Homes team — experienced real estate professionals dedicated to delivering affordable luxury living in Nairobi.",
+  description:
+    "Meet the Sapio Homes team — experienced real estate professionals dedicated to delivering affordable luxury living in Nairobi.",
 };
 
 const departments = [
@@ -18,7 +28,8 @@ const departments = [
     name: "Agent (Full Status)",
     count: 12,
     icon: UserCheck,
-    description: "Licensed agents driving sales, viewings, and client relationships across Nairobi.",
+    description:
+      "Licensed agents driving sales, viewings, and client relationships across Nairobi.",
   },
   {
     name: "Agent (Interns)",
@@ -30,13 +41,15 @@ const departments = [
     name: "Finance",
     count: 0,
     icon: PiggyBank,
-    description: "Managing company finances, investor relations, and payment processing.",
+    description:
+      "Managing company finances, investor relations, and payment processing.",
   },
   {
     name: "IT",
     count: 0,
     icon: Monitor,
-    description: "Powering our digital infrastructure, website, and property management systems.",
+    description:
+      "Powering our digital infrastructure, website, and property management systems.",
   },
   {
     name: "Marketing",
@@ -78,76 +91,91 @@ const leadership = [
 export default function TeamPage() {
   return (
     <div className="min-h-screen pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <Link href="/" className="inline-flex items-center gap-1.5 text-muted hover:text-amber-500 text-sm mb-8 transition-colors">
-          &larr; Back to Home
-        </Link>
-        <div className="text-center mb-16">
-          <h1 className="font-serif text-4xl sm:text-5xl font-light text-primary mb-4">
-            Our Team
-          </h1>
-          <p className="text-secondary max-w-3xl mx-auto text-lg">
-            Meet the dedicated professionals behind Sapio Homes. Our team combines decades of
-            real estate experience with a passion for creating exceptional living spaces.
-          </p>
-        </div>
-
-        {/* Leadership */}
-        <h2 className="font-serif text-2xl font-light text-primary mb-8">Leadership</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {leadership.map((person) => (
-            <div key={person.name} className={"u-card p-6 text-center"}>
-              <div className="w-20 h-20 bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-amber-500/30">
-                <span className="text-2xl font-bold text-amber-400">
-                  {person.name.split(" ").map((n) => n[0]).join("")}
-                </span>
-              </div>
-              <h3 className="text-lg font-bold text-primary">{person.name}</h3>
-              <p className="text-amber-400 text-sm font-medium mb-3">{person.role}</p>
-              <p className="text-secondary text-sm leading-relaxed">{person.bio}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Departments */}
-        <h2 className="font-serif text-2xl font-light text-primary mb-8">Departments</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {departments.map((dept) => {
-            const Icon = dept.icon;
-            return (
-              <div key={dept.name} className={"u-card p-6"}>
-                <div className="flex items-center gap-4 mb-3">
-                  <div className="w-10 h-10 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-500/20">
-                    <Icon className="w-5 h-5 text-amber-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-primary font-semibold">{dept.name}</h3>
-                    <span className={dept.count > 0 ? "text-amber-400 text-sm" : "text-muted text-sm"}>
-                      {dept.count} {dept.count === 1 ? "member" : "members"}
-                    </span>
-                  </div>
-                </div>
-                <p className="text-secondary text-sm leading-relaxed">{dept.description}</p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Join the team */}
-        <div className={"u-card p-8 text-center"}>
-          <h2 className="font-serif text-2xl font-light text-primary mb-4">Join Our Team</h2>
-          <p className="text-secondary mb-6 max-w-xl mx-auto">
-            We&apos;re always looking for talented individuals who share our passion for real estate
-            and exceptional service. Check our current openings or send us your CV.
-          </p>
+      <section className="bg-app-secondary py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Link
-            href="/careers"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-black font-semibold px-8 py-3 rounded-xl transition-all"
+            href="/"
+            className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-amber-500"
           >
-            View Careers
+            &larr; Back to Home
           </Link>
+          <SectionHeading
+            align="left"
+            eyebrow="Our People"
+            title="The team behind Sapio Homes"
+            description="Meet the dedicated professionals behind Sapio Homes. Our team combines decades of real estate experience with a passion for creating exceptional living spaces."
+            className="mt-10"
+          />
         </div>
-      </div>
+      </section>
+
+      <section className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <h2 className="font-serif text-3xl font-light text-primary">Leadership</h2>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {leadership.map((person) => (
+              <div key={person.name} className="u-card u-card-interactive group p-6 text-center">
+                <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full border-2 border-amber-500/30 bg-amber-500/10 transition-colors duration-300 group-hover:border-amber-500/50 group-hover:bg-amber-500/15">
+                  <span className="font-serif text-2xl font-bold text-amber-500">
+                    {person.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </span>
+                </div>
+                <h3 className="font-serif text-lg font-medium text-primary">{person.name}</h3>
+                <p className="mt-1 text-sm font-medium text-amber-500">{person.role}</p>
+                <p className="mt-3 text-sm leading-relaxed text-secondary">{person.bio}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-20">
+            <h2 className="font-serif text-3xl font-light text-primary">Departments</h2>
+            <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {departments.map((dept) => {
+                const Icon = dept.icon;
+                return (
+                  <div key={dept.name} className="u-card u-card-interactive group p-6">
+                    <div className="mb-4 flex items-center gap-4">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-amber-200/60 bg-amber-50 text-amber-500 transition-colors duration-300 group-hover:bg-amber-500 group-hover:text-black dark:border-amber-500/20">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-primary">{dept.name}</h3>
+                        <span
+                          className={
+                            dept.count > 0
+                              ? "text-sm text-amber-500"
+                              : "text-sm text-muted"
+                          }
+                        >
+                          {dept.count} {dept.count === 1 ? "member" : "members"}
+                        </span>
+                      </div>
+                    </div>
+                    <p className="text-sm leading-relaxed text-secondary">{dept.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-16 rounded-2xl border border-app-border bg-app-secondary p-10 text-center">
+            <h2 className="font-serif text-2xl font-light text-primary">Join Our Team</h2>
+            <p className="mx-auto mt-3 max-w-xl text-secondary">
+              We&apos;re always looking for talented individuals who share our passion for real estate
+              and exceptional service.
+            </p>
+            <Link
+              href="/careers"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-amber-500 px-8 py-3 text-sm font-semibold uppercase tracking-[0.14em] text-black transition-all hover:bg-amber-400"
+            >
+              View Careers
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

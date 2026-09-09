@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Facebook, Youtube, Instagram, Linkedin, Mail, Phone, MapPin, Home, ArrowUpRight } from "lucide-react";
+import { Facebook, Youtube, Instagram, Linkedin, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { subscribeNewsletter } from "@/lib/api";
 
 
@@ -31,10 +32,16 @@ export default function Footer() {
             {/* Brand */}
             <div className="lg:col-span-2">
               <Link href="/" className="flex items-center gap-3 mb-5 group">
-                <div className="w-10 h-10 bg-amber-50 dark:bg-amber-500/10 rounded-xl flex items-center justify-center border border-amber-200/50 dark:border-amber-500/20 group-hover:bg-amber-100 dark:group-hover:bg-amber-500/20 transition-all">
-                  <Home className="w-5 h-5 text-amber-500" />
+                <div className="relative w-10 h-10">
+                  <Image
+                    src="https://ppkfgsakvcijmmhjwbcz.supabase.co/storage/v1/object/public/Photos/SOLD-BY_Sapio-homes-logo.png"
+                    alt="Sapio Homes"
+                    fill
+                    className="object-contain"
+                    sizes="40px"
+                  />
                 </div>
-                <span className="font-serif text-xl font-light text-primary">Sapio Homes</span>
+                <span className="font-serif text-xl font-light text-primary group-hover:text-amber-500 transition-colors">Sapio Homes</span>
               </Link>
               <p className="text-secondary text-sm leading-relaxed max-w-sm mb-6">
                 Own the future of city living. Sapio Homes designs, builds, and manages

@@ -8,76 +8,29 @@ const Stats = dynamic(() => import("./Stats"), { ssr: false });
 
 export default function PropertiesSection() {
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap');
-        * { box-sizing: border-box; }
-        a { transition: all 0.2s; }
-      `}</style>
-
-      <section
-        id="properties"
-        style={{
-          background: "var(--props-bg)",
-          padding: "96px 0",
-          fontFamily: "'DM Sans', system-ui, sans-serif",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            padding: "0 24px",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: 32,
-              marginBottom: 0,
-            }}
-          >
-            <div style={{ maxWidth: 640 }}>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 12,
-                  fontSize: 11,
-                  letterSpacing: "0.3em",
-                  textTransform: "uppercase",
-                  color: "var(--props-text-muted)",
-                  marginBottom: 16,
-                }}
-              >
-                <span style={{ height: 1, width: 40, background: "var(--props-accent)", display: "inline-block" }} />
-                Projects
-              </div>
-              <h2
-                style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: "clamp(36px, 5vw, 64px)",
-                  fontWeight: 300,
-                  color: "var(--props-text)",
-                  lineHeight: 1.05,
-                  letterSpacing: "-0.01em",
-                  margin: 0,
-                }}
-              >
-                A growing portfolio of{" "}
-                <span style={{ fontStyle: "italic" }}>affordable luxury</span>.
-              </h2>
+    <section
+      id="properties"
+      className="scroll-mt-24 bg-app-secondary py-24 sm:py-32"
+      aria-label="Sapio Homes properties"
+    >
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-4">
+              <span className="u-hairline" />
+              <span className="u-eyebrow">Projects</span>
             </div>
-            <Stats />
+            <h2 className="mt-6 font-serif text-4xl font-light leading-[1.05] text-primary sm:text-5xl text-balance">
+              A growing portfolio of{" "}
+              <span className="italic text-amber-500">affordable luxury</span>.
+            </h2>
           </div>
-
-          <ProjectList />
-          <ApartmentSection />
+          <Stats />
         </div>
-      </section>
-    </>
+
+        <ProjectList />
+        <ApartmentSection />
+      </div>
+    </section>
   );
 }
